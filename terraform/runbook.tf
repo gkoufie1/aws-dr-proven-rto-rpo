@@ -91,6 +91,20 @@ data "aws_iam_policy_document" "drill_control" {
     actions   = ["fis:ListExperiments"]
     resources = ["*"]
   }
+
+  # The first StartExperiment in an account creates FIS's service-linked
+  # role. Without this the first drill in a fresh account fails with
+  # AccessDenied on iam:CreateServiceLinkedRole (found on the first real run).
+  statement {
+    sid       = "CreateFisServiceLinkedRole"
+    actions   = ["iam:CreateServiceLinkedRole"]
+    resources = ["arn:${local.partition}:iam::${local.account_id}:role/aws-service-role/fis.amazonaws.com/AWSServiceRoleForFIS"]
+    condition {
+      test     = "StringEquals"
+      variable = "iam:AWSServiceName"
+      values   = ["fis.amazonaws.com"]
+    }
+  }
 }
 
 module "drill_control" {
@@ -356,7 +370,10 @@ locals {
     BackoffRate     = 2
   }]
 
-  writer_expr = "{% ($w := $states.result.GlobalClusters[0].GlobalClusterMembers[IsWriter = true].DBClusterArn; $exists($w) ? $w : 'none') %}"
+  # Step Functions SDK integrations return Java-SDK field names: "DbClusterArn",
+  # not boto3/CLI "DBClusterArn". Getting this wrong never matches the writer
+  # (found on the first real drill: promotion succeeded, runbook kept polling).
+  writer_expr = "{% ($w := $states.result.GlobalClusters[0].GlobalClusterMembers[IsWriter = true].DbClusterArn; $exists($w) ? $w : 'none') %}"
 
   failover_definition = {
     Comment       = "Unplanned cross-region failover of ${local.name} to ${var.secondary_region}"
@@ -676,7 +693,7 @@ locals {
         Resource  = "arn:aws:states:::aws-sdk:rds:describeGlobalClusters"
         Arguments = { GlobalClusterIdentifier = aws_rds_global_cluster.this.id }
         Assign = {
-          primarySync  = "{% ($m := $states.result.GlobalClusters[0].GlobalClusterMembers[DBClusterArn = '${aws_rds_cluster.primary.arn}']; $exists($m.SynchronizationStatus) ? $m.SynchronizationStatus : 'absent') %}"
+          primarySync  = "{% ($m := $states.result.GlobalClusters[0].GlobalClusterMembers[DbClusterArn = '${aws_rds_cluster.primary.arn}']; $exists($m.SynchronizationStatus) ? $m.SynchronizationStatus : 'absent') %}"
           globalStatus = "{% $states.result.GlobalClusters[0].Status %}"
           syncPolls    = "{% $syncPolls + 1 %}"
         }
