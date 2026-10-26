@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "run_id": "drill-20261026T204238Z",
+  "scenario": "region-impairment",
+  "fault": "Impair the primary region: API Lambda fails every invocation and DynamoDB replication is severed.",
+  "regions": {
+    "primary": "us-east-1",
+    "secondary": "us-west-2"
+  },
+  "targets": {
+    "rto_seconds": 300.0,
+    "rpo_seconds": 5.0
+  },
+  "drill_started_at": "2026-10-26T20:43:03.134Z",
+  "generated_at": "2026-10-26T20:47:36.910Z",
+  "probe_stop_reason": "recovered",
+  "runbook": {
+    "final_state": "SECONDARY_ACTIVE",
+    "trigger_reason": "watchdog: 3 consecutive failed probes of primary /health",
+    "execution_id": "arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z",
+    "last_error": null
+  },
+  "experiment": {
+    "id": "EXPLsNDeyePQjaFg2E",
+    "template_id": "EXT97HuqpsBJvxSR6",
+    "status": "running",
+    "start_time": "2026-10-26T20:44:04.523000+00:00",
+    "actions": {
+      "fail-primary-api": {
+        "status": "running",
+        "start_time": "2026-10-26T20:44:16.697000+00:00",
+        "end_time": null
+      },
+      "sever-ledger-replication": {
+        "status": "running",
+        "start_time": "2026-10-26T20:44:37.958000+00:00",
+        "end_time": null
+      }
+    }
+  },
+  "replication_lag_before_outage": {
+    "aurora_replication_lag_ms_max": 23175.0,
+    "aurora_rpo_lag_ms_max": 1039.0,
+    "dynamodb_replication_latency_ms_max": 1129.0
+  },
+  "verdict": "FAIL",
+  "reasons": [
+    "dynamodb: RPO 33.0s exceeds target 5s (33 acknowledged writes lost)"
+  ],
+  "rto_seconds": 129.121,
+  "rpo_seconds": 32.993,
+  "rpo_by_store": {
+    "aurora": {
+      "verified": true,
+      "acknowledged_by_old_primary": 112,
+      "lost_writes": 0,
+      "lost_seqs": [],
+      "rpo_seconds": 0.0
+    },
+    "dynamodb": {
+      "verified": true,
+      "acknowledged_by_old_primary": 112,
+      "lost_writes": 33,
+      "lost_seqs": [
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "rpo_seconds": 32.993
+    }
+  },
+  "phases": {
+    "fault_to_first_error": 39.701,
+    "detection": 12.316,
+    "runbook_start": 0.24,
+    "db_promotion": 20.536,
+    "dr_verification": 31.236,
+    "dns_and_client": 64.552
+  },
+  "probe": {
+    "total": 271,
+    "acked": 142,
+    "failed": 129,
+    "resolution_seconds": 1.0,
+    "first_failure_seq": 112,
+    "recovery_seq": 241,
+    "recovered_region": "us-west-2"
+  },
+  "timestamps": {
+    "fault_injected_at": "2026-10-26T20:44:16.697Z",
+    "outage_start": "2026-10-26T20:44:56.397Z",
+    "detected_at": "2026-10-26T20:45:08.714Z",
+    "failover_started_at": "2026-10-26T20:45:08.954Z",
+    "failover_issued_at": "2026-10-26T20:45:09.195Z",
+    "promoted_at": "2026-10-26T20:45:29.731Z",
+    "verified_at": "2026-10-26T20:46:00.967Z",
+    "recovered_at": "2026-10-26T20:47:05.518Z"
+  }
+}

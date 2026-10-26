@@ -14,3 +14,6 @@ tfplan
 plan.log
 apply.log
 drill-run.log
+docs/screenshots/_raw/
+teardown.log
+teardown.log

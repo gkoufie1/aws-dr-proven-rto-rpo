@@ -1,0 +1,1479 @@
+{
+    "events": [
+        {
+            "timestamp": "2026-10-26T16:45:08.937000-04:00",
+            "type": "ExecutionStarted",
+            "id": 1,
+            "previousEventId": 0,
+            "executionStartedEventDetails": {
+                "input": "{\"reason\": \"watchdog: 3 consecutive failed probes of primary /health\", \"first_failure_at\": \"2026-10-26T20:44:58.336Z\", \"detected_at\": \"2026-10-26T20:45:08.714Z\"}",
+                "inputDetails": {
+                    "truncated": false
+                },
+                "roleArn": "arn:aws:iam::829241815848:role/dr-proof-runbook"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:08.954000-04:00",
+            "type": "PassStateEntered",
+            "id": 2,
+            "previousEventId": 0,
+            "stateEnteredEventDetails": {
+                "name": "Init",
+                "input": "{\"reason\": \"watchdog: 3 consecutive failed probes of primary /health\", \"first_failure_at\": \"2026-10-26T20:44:58.336Z\", \"detected_at\": \"2026-10-26T20:45:08.714Z\"}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:08.954000-04:00",
+            "type": "PassStateExited",
+            "id": 3,
+            "previousEventId": 2,
+            "stateExitedEventDetails": {
+                "name": "Init",
+                "output": "{\"reason\": \"watchdog: 3 consecutive failed probes of primary /health\", \"first_failure_at\": \"2026-10-26T20:44:58.336Z\", \"detected_at\": \"2026-10-26T20:45:08.714Z\"}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:08.954000-04:00",
+            "type": "TaskStateEntered",
+            "id": 4,
+            "previousEventId": 3,
+            "stateEnteredEventDetails": {
+                "name": "AcquireLock",
+                "input": "{\"reason\": \"watchdog: 3 consecutive failed probes of primary /health\", \"first_failure_at\": \"2026-10-26T20:44:58.336Z\", \"detected_at\": \"2026-10-26T20:45:08.714Z\"}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:08.954000-04:00",
+            "type": "TaskScheduled",
+            "id": 5,
+            "previousEventId": 4,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConditionExpression\":\"#s = :expected\",\"ExpressionAttributeNames\":{\"#s\":\"state\"},\"ExpressionAttributeValues\":{\":d\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\":e\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\":expected\":{\"S\":\"PRIMARY_ACTIVE\"},\":f\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\":r\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\":s\":{\"S\":\"FAILING_OVER\"},\":t\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\",\"UpdateExpression\":\"SET #s = :s, trigger_reason = :r, first_failure_at = :f, detected_at = :d, failover_started_at = :t, execution_id = :e REMOVE failover_issued_at, promoted_at, verified_at, last_error\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.020000-04:00",
+            "type": "TaskStarted",
+            "id": 6,
+            "previousEventId": 5,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.075000-04:00",
+            "type": "TaskSucceeded",
+            "id": 7,
+            "previousEventId": 6,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem",
+                "output": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:08 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:08 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.085000-04:00",
+            "type": "TaskStateExited",
+            "id": 8,
+            "previousEventId": 7,
+            "stateExitedEventDetails": {
+                "name": "AcquireLock",
+                "output": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:08 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:08 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.085000-04:00",
+            "type": "TaskStateEntered",
+            "id": 9,
+            "previousEventId": 8,
+            "stateEnteredEventDetails": {
+                "name": "DescribeGlobalCluster",
+                "input": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:08 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:08 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"TPKU4OM1ECTBC6RGU1JKP5B3O3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.085000-04:00",
+            "type": "TaskScheduled",
+            "id": 10,
+            "previousEventId": 9,
+            "taskScheduledEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters",
+                "region": "us-west-2",
+                "parameters": "{\"GlobalClusterIdentifier\":\"dr-proof-global\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.121000-04:00",
+            "type": "TaskStarted",
+            "id": 11,
+            "previousEventId": 10,
+            "taskStartedEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.184000-04:00",
+            "type": "TaskSucceeded",
+            "id": 12,
+            "previousEventId": 11,
+            "taskSucceededEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"available\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.195000-04:00",
+            "type": "TaskStateExited",
+            "id": 13,
+            "previousEventId": 12,
+            "stateExitedEventDetails": {
+                "name": "DescribeGlobalCluster",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"available\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.195000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 14,
+            "previousEventId": 13,
+            "stateEnteredEventDetails": {
+                "name": "SecondaryAlreadyWriter",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"available\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.195000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 15,
+            "previousEventId": 14,
+            "stateExitedEventDetails": {
+                "name": "SecondaryAlreadyWriter",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"available\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.195000-04:00",
+            "type": "TaskStateEntered",
+            "id": 16,
+            "previousEventId": 15,
+            "stateEnteredEventDetails": {
+                "name": "FailoverGlobalCluster",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"available\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.195000-04:00",
+            "type": "TaskScheduled",
+            "id": 17,
+            "previousEventId": 16,
+            "taskScheduledEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "failoverGlobalCluster",
+                "region": "us-west-2",
+                "parameters": "{\"AllowDataLoss\":true,\"GlobalClusterIdentifier\":\"dr-proof-global\",\"TargetDbClusterIdentifier\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.238000-04:00",
+            "type": "TaskStarted",
+            "id": 18,
+            "previousEventId": 17,
+            "taskStartedEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "failoverGlobalCluster"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.411000-04:00",
+            "type": "TaskSucceeded",
+            "id": 19,
+            "previousEventId": 18,
+            "taskSucceededEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "failoverGlobalCluster",
+                "output": "{\"GlobalCluster\":{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.426000-04:00",
+            "type": "TaskStateExited",
+            "id": 20,
+            "previousEventId": 19,
+            "stateExitedEventDetails": {
+                "name": "FailoverGlobalCluster",
+                "output": "{\"GlobalCluster\":{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:09.426000-04:00",
+            "type": "WaitStateEntered",
+            "id": 21,
+            "previousEventId": 20,
+            "stateEnteredEventDetails": {
+                "name": "WaitForPromotion",
+                "input": "{\"GlobalCluster\":{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.482000-04:00",
+            "type": "WaitStateExited",
+            "id": 22,
+            "previousEventId": 21,
+            "stateExitedEventDetails": {
+                "name": "WaitForPromotion",
+                "output": "{\"GlobalCluster\":{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.482000-04:00",
+            "type": "TaskStateEntered",
+            "id": 23,
+            "previousEventId": 22,
+            "stateEnteredEventDetails": {
+                "name": "CheckPromotion",
+                "input": "{\"GlobalCluster\":{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.482000-04:00",
+            "type": "TaskScheduled",
+            "id": 24,
+            "previousEventId": 23,
+            "taskScheduledEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters",
+                "region": "us-west-2",
+                "parameters": "{\"GlobalClusterIdentifier\":\"dr-proof-global\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.518000-04:00",
+            "type": "TaskStarted",
+            "id": 25,
+            "previousEventId": 24,
+            "taskStartedEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.554000-04:00",
+            "type": "TaskSucceeded",
+            "id": 26,
+            "previousEventId": 25,
+            "taskSucceededEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.573000-04:00",
+            "type": "TaskStateExited",
+            "id": 27,
+            "previousEventId": 26,
+            "stateExitedEventDetails": {
+                "name": "CheckPromotion",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.573000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 28,
+            "previousEventId": 27,
+            "stateEnteredEventDetails": {
+                "name": "Promoted",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.573000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 29,
+            "previousEventId": 28,
+            "stateExitedEventDetails": {
+                "name": "Promoted",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:19.573000-04:00",
+            "type": "WaitStateEntered",
+            "id": 30,
+            "previousEventId": 29,
+            "stateEnteredEventDetails": {
+                "name": "WaitForPromotion",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.605000-04:00",
+            "type": "WaitStateExited",
+            "id": 31,
+            "previousEventId": 30,
+            "stateExitedEventDetails": {
+                "name": "WaitForPromotion",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.605000-04:00",
+            "type": "TaskStateEntered",
+            "id": 32,
+            "previousEventId": 31,
+            "stateEnteredEventDetails": {
+                "name": "CheckPromotion",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"pending\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.605000-04:00",
+            "type": "TaskScheduled",
+            "id": 33,
+            "previousEventId": 32,
+            "taskScheduledEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters",
+                "region": "us-west-2",
+                "parameters": "{\"GlobalClusterIdentifier\":\"dr-proof-global\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.643000-04:00",
+            "type": "TaskStarted",
+            "id": 34,
+            "previousEventId": 33,
+            "taskStartedEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.718000-04:00",
+            "type": "TaskSucceeded",
+            "id": 35,
+            "previousEventId": 34,
+            "taskSucceededEventDetails": {
+                "resourceType": "aws-sdk:rds",
+                "resource": "describeGlobalClusters",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"failing-over\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\"],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.731000-04:00",
+            "type": "TaskStateExited",
+            "id": 36,
+            "previousEventId": 35,
+            "stateExitedEventDetails": {
+                "name": "CheckPromotion",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"failing-over\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\"],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.731000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 37,
+            "previousEventId": 36,
+            "stateEnteredEventDetails": {
+                "name": "Promoted",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"failing-over\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\"],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.731000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 38,
+            "previousEventId": 37,
+            "stateExitedEventDetails": {
+                "name": "Promoted",
+                "output": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"failing-over\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\"],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.731000-04:00",
+            "type": "TaskStateEntered",
+            "id": 39,
+            "previousEventId": 38,
+            "stateEnteredEventDetails": {
+                "name": "RecordPromoted",
+                "input": "{\"GlobalClusters\":[{\"DatabaseName\":\"drproof\",\"DeletionProtection\":false,\"Endpoint\":\"dr-proof-global.global-gheimldxqnnz.global.rds.amazonaws.com\",\"Engine\":\"aurora-postgresql\",\"EngineLifecycleSupport\":\"open-source-rds-extended-support\",\"EngineVersion\":\"16.15\",\"FailoverState\":{\"FromDbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"IsDataLossAllowed\":true,\"Status\":\"failing-over\",\"ToDbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\"},\"GlobalClusterArn\":\"arn:aws:rds::829241815848:global-cluster:dr-proof-global\",\"GlobalClusterIdentifier\":\"dr-proof-global\",\"GlobalClusterMembers\":[{\"DbClusterArn\":\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\",\"GlobalWriteForwardingStatus\":\"disabled\",\"IsWriter\":false,\"Readers\":[],\"SynchronizationStatus\":\"connected\"},{\"DbClusterArn\":\"arn:aws:rds:us-west-2:829241815848:cluster:dr-proof-secondary\",\"IsWriter\":true,\"Readers\":[\"arn:aws:rds:us-east-1:829241815848:cluster:dr-proof-primary\"],\"SynchronizationStatus\":\"connected\"}],\"GlobalClusterResourceId\":\"cluster-76a77354050f021a\",\"Status\":\"failing-over\",\"StorageEncrypted\":true,\"StorageEncryptionType\":\"sse-kms\",\"TagList\":[{\"Key\":\"Project\",\"Value\":\"dr-proof\"},{\"Key\":\"ManagedBy\",\"Value\":\"terraform\"},{\"Key\":\"Purpose\",\"Value\":\"dr-evidence\"}]}]}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.731000-04:00",
+            "type": "TaskScheduled",
+            "id": 40,
+            "previousEventId": 39,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem",
+                "region": "us-west-2",
+                "parameters": "{\"ExpressionAttributeValues\":{\":i\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\":t\":{\"S\":\"2026-10-26T20:45:29.731Z\"}},\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\",\"UpdateExpression\":\"SET failover_issued_at = :i, promoted_at = :t\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.796000-04:00",
+            "type": "TaskStarted",
+            "id": 41,
+            "previousEventId": 40,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.840000-04:00",
+            "type": "TaskSucceeded",
+            "id": 42,
+            "previousEventId": 41,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem",
+                "output": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.850000-04:00",
+            "type": "TaskStateExited",
+            "id": 43,
+            "previousEventId": 42,
+            "stateExitedEventDetails": {
+                "name": "RecordPromoted",
+                "output": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.850000-04:00",
+            "type": "TaskStateEntered",
+            "id": 44,
+            "previousEventId": 43,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"G61PU07NPHUISS0S86GJCOQLS3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.850000-04:00",
+            "type": "TaskScheduled",
+            "id": 45,
+            "previousEventId": 44,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.885000-04:00",
+            "type": "TaskStarted",
+            "id": 46,
+            "previousEventId": 45,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:29.985000-04:00",
+            "type": "TaskSucceeded",
+            "id": 47,
+            "previousEventId": 46,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:30.001000-04:00",
+            "type": "TaskStateExited",
+            "id": 48,
+            "previousEventId": 47,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:30.001000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 49,
+            "previousEventId": 48,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:30.001000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 50,
+            "previousEventId": 49,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:30.001000-04:00",
+            "type": "WaitStateEntered",
+            "id": 51,
+            "previousEventId": 50,
+            "stateEnteredEventDetails": {
+                "name": "WaitBeforeVerify",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.037000-04:00",
+            "type": "WaitStateExited",
+            "id": 52,
+            "previousEventId": 51,
+            "stateExitedEventDetails": {
+                "name": "WaitBeforeVerify",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.037000-04:00",
+            "type": "TaskStateEntered",
+            "id": 53,
+            "previousEventId": 52,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"30bfff15-7656-47e5-910e-68945e6e6044\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:29 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:29 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=0c91bcc946eecd52;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"30bfff15-7656-47e5-910e-68945e6e6044\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.037000-04:00",
+            "type": "TaskScheduled",
+            "id": 54,
+            "previousEventId": 53,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.069000-04:00",
+            "type": "TaskStarted",
+            "id": 55,
+            "previousEventId": 54,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.153000-04:00",
+            "type": "TaskSucceeded",
+            "id": 56,
+            "previousEventId": 55,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.162000-04:00",
+            "type": "TaskStateExited",
+            "id": 57,
+            "previousEventId": 56,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.162000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 58,
+            "previousEventId": 57,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.162000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 59,
+            "previousEventId": 58,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.162000-04:00",
+            "type": "WaitStateEntered",
+            "id": 60,
+            "previousEventId": 59,
+            "stateEnteredEventDetails": {
+                "name": "WaitBeforeVerify",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.200000-04:00",
+            "type": "WaitStateExited",
+            "id": 61,
+            "previousEventId": 60,
+            "stateExitedEventDetails": {
+                "name": "WaitBeforeVerify",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.200000-04:00",
+            "type": "TaskStateEntered",
+            "id": 62,
+            "previousEventId": 61,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=3a516ad672554adb;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"cbac05e3-9daa-4099-9e24-6dd83fe5a213\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.200000-04:00",
+            "type": "TaskScheduled",
+            "id": 63,
+            "previousEventId": 62,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.233000-04:00",
+            "type": "TaskStarted",
+            "id": 64,
+            "previousEventId": 63,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.319000-04:00",
+            "type": "TaskSucceeded",
+            "id": 65,
+            "previousEventId": 64,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.330000-04:00",
+            "type": "TaskStateExited",
+            "id": 66,
+            "previousEventId": 65,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.330000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 67,
+            "previousEventId": 66,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.330000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 68,
+            "previousEventId": 67,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:40.330000-04:00",
+            "type": "WaitStateEntered",
+            "id": 69,
+            "previousEventId": 68,
+            "stateEnteredEventDetails": {
+                "name": "WaitBeforeVerify",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.356000-04:00",
+            "type": "WaitStateExited",
+            "id": 70,
+            "previousEventId": 69,
+            "stateExitedEventDetails": {
+                "name": "WaitBeforeVerify",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.356000-04:00",
+            "type": "TaskStateEntered",
+            "id": 71,
+            "previousEventId": 70,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:40 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:40 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=5c0c2db362cbf704;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"5527d0b1-56cf-422d-96d8-7887aa1d7bf0\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.356000-04:00",
+            "type": "TaskScheduled",
+            "id": 72,
+            "previousEventId": 71,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.391000-04:00",
+            "type": "TaskStarted",
+            "id": 73,
+            "previousEventId": 72,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.469000-04:00",
+            "type": "TaskSucceeded",
+            "id": 74,
+            "previousEventId": 73,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.479000-04:00",
+            "type": "TaskStateExited",
+            "id": 75,
+            "previousEventId": 74,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.479000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 76,
+            "previousEventId": 75,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.479000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 77,
+            "previousEventId": 76,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:45.479000-04:00",
+            "type": "WaitStateEntered",
+            "id": 78,
+            "previousEventId": 77,
+            "stateEnteredEventDetails": {
+                "name": "WaitBeforeVerify",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.514000-04:00",
+            "type": "WaitStateExited",
+            "id": 79,
+            "previousEventId": 78,
+            "stateExitedEventDetails": {
+                "name": "WaitBeforeVerify",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.514000-04:00",
+            "type": "TaskStateEntered",
+            "id": 80,
+            "previousEventId": 79,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:45 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:45 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=33ffa4cff0759104;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"d69cfa9c-f5a2-4259-9215-681ef2974c18\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.514000-04:00",
+            "type": "TaskScheduled",
+            "id": 81,
+            "previousEventId": 80,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.552000-04:00",
+            "type": "TaskStarted",
+            "id": 82,
+            "previousEventId": 81,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.657000-04:00",
+            "type": "TaskSucceeded",
+            "id": 83,
+            "previousEventId": 82,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.666000-04:00",
+            "type": "TaskStateExited",
+            "id": 84,
+            "previousEventId": 83,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.666000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 85,
+            "previousEventId": 84,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.666000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 86,
+            "previousEventId": 85,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.666000-04:00",
+            "type": "WaitStateEntered",
+            "id": 87,
+            "previousEventId": 86,
+            "stateEnteredEventDetails": {
+                "name": "WaitBeforeVerify",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.699000-04:00",
+            "type": "WaitStateExited",
+            "id": 88,
+            "previousEventId": 87,
+            "stateExitedEventDetails": {
+                "name": "WaitBeforeVerify",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.699000-04:00",
+            "type": "TaskStateEntered",
+            "id": 89,
+            "previousEventId": 88,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"849c67b4-6492-455b-aec2-9cab885e9d50\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2397eef8d0dc2598;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"849c67b4-6492-455b-aec2-9cab885e9d50\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.699000-04:00",
+            "type": "TaskScheduled",
+            "id": 90,
+            "previousEventId": 89,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.729000-04:00",
+            "type": "TaskStarted",
+            "id": 91,
+            "previousEventId": 90,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.811000-04:00",
+            "type": "TaskSucceeded",
+            "id": 92,
+            "previousEventId": 91,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.822000-04:00",
+            "type": "TaskStateExited",
+            "id": 93,
+            "previousEventId": 92,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.822000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 94,
+            "previousEventId": 93,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.822000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 95,
+            "previousEventId": 94,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:55.822000-04:00",
+            "type": "WaitStateEntered",
+            "id": 96,
+            "previousEventId": 95,
+            "stateEnteredEventDetails": {
+                "name": "WaitBeforeVerify",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.848000-04:00",
+            "type": "WaitStateExited",
+            "id": 97,
+            "previousEventId": 96,
+            "stateExitedEventDetails": {
+                "name": "WaitBeforeVerify",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.848000-04:00",
+            "type": "TaskStateEntered",
+            "id": 98,
+            "previousEventId": 97,
+            "stateEnteredEventDetails": {
+                "name": "VerifyDrHealth",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":false,\"status\":503},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"],\"Content-Length\":[\"33\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:55 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"33\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:45:55 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=702739469eab5586;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"14a5ad9b-2fcc-471d-966e-0d3ccf8b9b76\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.848000-04:00",
+            "type": "TaskScheduled",
+            "id": 99,
+            "previousEventId": 98,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://jeiw0pquok.execute-api.us-west-2.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.877000-04:00",
+            "type": "TaskStarted",
+            "id": 100,
+            "previousEventId": 99,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.948000-04:00",
+            "type": "TaskSucceeded",
+            "id": 101,
+            "previousEventId": 100,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-west-2\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:00 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:46:00 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.967000-04:00",
+            "type": "TaskStateExited",
+            "id": 102,
+            "previousEventId": 101,
+            "stateExitedEventDetails": {
+                "name": "VerifyDrHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-west-2\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:00 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:46:00 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.967000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 103,
+            "previousEventId": 102,
+            "stateEnteredEventDetails": {
+                "name": "DrHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-west-2\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:00 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:46:00 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.967000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 104,
+            "previousEventId": 103,
+            "stateExitedEventDetails": {
+                "name": "DrHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-west-2\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:00 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:46:00 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.967000-04:00",
+            "type": "TaskStateEntered",
+            "id": 105,
+            "previousEventId": 104,
+            "stateEnteredEventDetails": {
+                "name": "MarkSecondaryActive",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-west-2\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:00 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:46:00 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbbbf-234feae67229aa8f121dff59;Parent=2a49513666cef290;Sampled=1;Lineage=2:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"6a2aef6d-15cb-4a24-8d7e-13dcc1177b88\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:00.967000-04:00",
+            "type": "TaskScheduled",
+            "id": 106,
+            "previousEventId": 105,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem",
+                "region": "us-west-2",
+                "parameters": "{\"ExpressionAttributeNames\":{\"#s\":\"state\"},\"ExpressionAttributeValues\":{\":s\":{\"S\":\"SECONDARY_ACTIVE\"},\":t\":{\"S\":\"2026-10-26T20:46:00.967Z\"}},\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\",\"UpdateExpression\":\"SET #s = :s, verified_at = :t\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.021000-04:00",
+            "type": "TaskStarted",
+            "id": 107,
+            "previousEventId": 106,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.073000-04:00",
+            "type": "TaskSucceeded",
+            "id": 108,
+            "previousEventId": 107,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "updateItem",
+                "output": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.084000-04:00",
+            "type": "TaskStateExited",
+            "id": 109,
+            "previousEventId": 108,
+            "stateExitedEventDetails": {
+                "name": "MarkSecondaryActive",
+                "output": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.084000-04:00",
+            "type": "TaskStateEntered",
+            "id": 110,
+            "previousEventId": 109,
+            "stateEnteredEventDetails": {
+                "name": "NotifySuccess",
+                "input": "{\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"2745614147\"],\"Content-Length\":[\"2\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"2\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"2745614147\",\"x-amzn-requestid\":\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"JKF7928ELM7AQ3KKF1RNFQ095VVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.084000-04:00",
+            "type": "TaskScheduled",
+            "id": 111,
+            "previousEventId": 110,
+            "taskScheduledEventDetails": {
+                "resourceType": "sns",
+                "resource": "publish",
+                "region": "us-west-2",
+                "parameters": "{\"Message\":\"Writer is now dr-proof-secondary in us-west-2. Trigger: watchdog: 3 consecutive failed probes of primary /health. Execution: arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\",\"Subject\":\"[dr-proof] Failover to us-west-2 complete\",\"TopicArn\":\"arn:aws:sns:us-west-2:829241815848:dr-proof-dr-events\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.133000-04:00",
+            "type": "TaskStarted",
+            "id": 112,
+            "previousEventId": 111,
+            "taskStartedEventDetails": {
+                "resourceType": "sns",
+                "resource": "publish"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.213000-04:00",
+            "type": "TaskSucceeded",
+            "id": 113,
+            "previousEventId": 112,
+            "taskSucceededEventDetails": {
+                "resourceType": "sns",
+                "resource": "publish",
+                "output": "{\"MessageId\":\"7ed85ed2-8874-51d3-80e5-3d8b363d659b\",\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"x-amzn-RequestId\":[\"9e250161-65bf-428b-b35e-ae01bb81573c\"],\"connection\":[\"keep-alive\"],\"Content-Length\":[\"294\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"text/xml\"]},\"HttpHeaders\":{\"connection\":\"keep-alive\",\"Content-Length\":\"294\",\"Content-Type\":\"text/xml\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"x-amzn-RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.224000-04:00",
+            "type": "TaskStateExited",
+            "id": 114,
+            "previousEventId": 113,
+            "stateExitedEventDetails": {
+                "name": "NotifySuccess",
+                "output": "{\"MessageId\":\"7ed85ed2-8874-51d3-80e5-3d8b363d659b\",\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"x-amzn-RequestId\":[\"9e250161-65bf-428b-b35e-ae01bb81573c\"],\"connection\":[\"keep-alive\"],\"Content-Length\":[\"294\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"text/xml\"]},\"HttpHeaders\":{\"connection\":\"keep-alive\",\"Content-Length\":\"294\",\"Content-Type\":\"text/xml\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"x-amzn-RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.224000-04:00",
+            "type": "SucceedStateEntered",
+            "id": 115,
+            "previousEventId": 114,
+            "stateEnteredEventDetails": {
+                "name": "Done",
+                "input": "{\"MessageId\":\"7ed85ed2-8874-51d3-80e5-3d8b363d659b\",\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"x-amzn-RequestId\":[\"9e250161-65bf-428b-b35e-ae01bb81573c\"],\"connection\":[\"keep-alive\"],\"Content-Length\":[\"294\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"text/xml\"]},\"HttpHeaders\":{\"connection\":\"keep-alive\",\"Content-Length\":\"294\",\"Content-Type\":\"text/xml\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"x-amzn-RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.224000-04:00",
+            "type": "SucceedStateExited",
+            "id": 116,
+            "previousEventId": 115,
+            "stateExitedEventDetails": {
+                "name": "Done",
+                "output": "{\"MessageId\":\"7ed85ed2-8874-51d3-80e5-3d8b363d659b\",\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"x-amzn-RequestId\":[\"9e250161-65bf-428b-b35e-ae01bb81573c\"],\"connection\":[\"keep-alive\"],\"Content-Length\":[\"294\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"text/xml\"]},\"HttpHeaders\":{\"connection\":\"keep-alive\",\"Content-Length\":\"294\",\"Content-Type\":\"text/xml\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"x-amzn-RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:01.249000-04:00",
+            "type": "ExecutionSucceeded",
+            "id": 117,
+            "previousEventId": 116,
+            "executionSucceededEventDetails": {
+                "output": "{\"MessageId\":\"7ed85ed2-8874-51d3-80e5-3d8b363d659b\",\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"x-amzn-RequestId\":[\"9e250161-65bf-428b-b35e-ae01bb81573c\"],\"connection\":[\"keep-alive\"],\"Content-Length\":[\"294\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:01 GMT\"],\"Content-Type\":[\"text/xml\"]},\"HttpHeaders\":{\"connection\":\"keep-alive\",\"Content-Length\":\"294\",\"Content-Type\":\"text/xml\",\"Date\":\"Mon, 26 Oct 2026 20:46:01 GMT\",\"x-amzn-RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"9e250161-65bf-428b-b35e-ae01bb81573c\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        }
+    ]
+}

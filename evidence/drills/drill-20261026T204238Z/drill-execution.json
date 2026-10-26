@@ -1,0 +1,1534 @@
+{
+    "events": [
+        {
+            "timestamp": "2026-10-26T16:43:03.134000-04:00",
+            "type": "ExecutionStarted",
+            "id": 1,
+            "previousEventId": 0,
+            "executionStartedEventDetails": {
+                "input": "{\"failback\": false}",
+                "inputDetails": {
+                    "truncated": false
+                },
+                "roleArn": "arn:aws:iam::829241815848:role/dr-proof-drill"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.153000-04:00",
+            "type": "PassStateEntered",
+            "id": 2,
+            "previousEventId": 0,
+            "stateEnteredEventDetails": {
+                "name": "Init",
+                "input": "{\"failback\": false}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.153000-04:00",
+            "type": "PassStateExited",
+            "id": 3,
+            "previousEventId": 2,
+            "stateExitedEventDetails": {
+                "name": "Init",
+                "output": "{\"failback\": false}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.153000-04:00",
+            "type": "TaskStateEntered",
+            "id": 4,
+            "previousEventId": 3,
+            "stateEnteredEventDetails": {
+                "name": "ReadDrState",
+                "input": "{\"failback\": false}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.153000-04:00",
+            "type": "TaskScheduled",
+            "id": 5,
+            "previousEventId": 4,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.199000-04:00",
+            "type": "TaskStarted",
+            "id": 6,
+            "previousEventId": 5,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.249000-04:00",
+            "type": "TaskSucceeded",
+            "id": 7,
+            "previousEventId": 6,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.261000-04:00",
+            "type": "TaskStateExited",
+            "id": 8,
+            "previousEventId": 7,
+            "stateExitedEventDetails": {
+                "name": "ReadDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.261000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 9,
+            "previousEventId": 8,
+            "stateEnteredEventDetails": {
+                "name": "SteadyState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.261000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 10,
+            "previousEventId": 9,
+            "stateExitedEventDetails": {
+                "name": "SteadyState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.261000-04:00",
+            "type": "TaskStateEntered",
+            "id": 11,
+            "previousEventId": 10,
+            "stateEnteredEventDetails": {
+                "name": "CheckPrimaryHealth",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"2EJAHAQN2RDBU40QJHVQN8KSFVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.261000-04:00",
+            "type": "TaskScheduled",
+            "id": 12,
+            "previousEventId": 11,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://bmfmlpybnb.execute-api.us-east-1.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.303000-04:00",
+            "type": "TaskStarted",
+            "id": 13,
+            "previousEventId": 12,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.579000-04:00",
+            "type": "TaskSucceeded",
+            "id": 14,
+            "previousEventId": 13,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "TaskStateExited",
+            "id": 15,
+            "previousEventId": 14,
+            "stateExitedEventDetails": {
+                "name": "CheckPrimaryHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 16,
+            "previousEventId": 15,
+            "stateEnteredEventDetails": {
+                "name": "PrimaryHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 17,
+            "previousEventId": 16,
+            "stateExitedEventDetails": {
+                "name": "PrimaryHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "ParallelStateEntered",
+            "id": 18,
+            "previousEventId": 17,
+            "stateEnteredEventDetails": {
+                "name": "RunDrill",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "ParallelStateStarted",
+            "id": 19,
+            "previousEventId": 18
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "TaskStateEntered",
+            "id": 20,
+            "previousEventId": 19,
+            "stateEnteredEventDetails": {
+                "name": "Probe",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "TaskScheduled",
+            "id": 21,
+            "previousEventId": 20,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-prober\",\"Payload\":{\"max_seconds\":840,\"no_fault_timeout_seconds\":420,\"recovery_success_threshold\":30,\"run_id\":\"drill-20261026T204238Z\"}}",
+                "timeoutInSeconds": 900
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.593000-04:00",
+            "type": "WaitStateEntered",
+            "id": 22,
+            "previousEventId": 19,
+            "stateEnteredEventDetails": {
+                "name": "Baseline",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:43:03.646000-04:00",
+            "type": "TaskStarted",
+            "id": 23,
+            "previousEventId": 21,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:03.639000-04:00",
+            "type": "WaitStateExited",
+            "id": 24,
+            "previousEventId": 22,
+            "stateExitedEventDetails": {
+                "name": "Baseline",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:03.639000-04:00",
+            "type": "TaskStateEntered",
+            "id": 25,
+            "previousEventId": 24,
+            "stateEnteredEventDetails": {
+                "name": "InjectFault",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:43:03 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:43:03 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=28a70f0ee3efe760;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8411cf5a-55e3-4fbb-9468-6473814fabbe\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:03.639000-04:00",
+            "type": "TaskScheduled",
+            "id": 26,
+            "previousEventId": 25,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"start_experiment\",\"run_id\":\"drill-20261026T204238Z\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:03.677000-04:00",
+            "type": "TaskStarted",
+            "id": 27,
+            "previousEventId": 26,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:04.663000-04:00",
+            "type": "TaskSucceeded",
+            "id": 28,
+            "previousEventId": 27,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"experiment_id\":\"EXPLsNDeyePQjaFg2E\",\"state\":\"initiating\",\"start_time\":\"2026-10-26T20:44:04.523000+00:00\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"7b57a843-c806-4551-9333-ae34c454ac27\"],\"Content-Length\":[\"112\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:04 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"112\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:44:04 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:04.674000-04:00",
+            "type": "TaskStateExited",
+            "id": 29,
+            "previousEventId": 28,
+            "stateExitedEventDetails": {
+                "name": "InjectFault",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"experiment_id\":\"EXPLsNDeyePQjaFg2E\",\"state\":\"initiating\",\"start_time\":\"2026-10-26T20:44:04.523000+00:00\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"7b57a843-c806-4551-9333-ae34c454ac27\"],\"Content-Length\":[\"112\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:04 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"112\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:44:04 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:04.674000-04:00",
+            "type": "WaitStateEntered",
+            "id": 30,
+            "previousEventId": 29,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"experiment_id\":\"EXPLsNDeyePQjaFg2E\",\"state\":\"initiating\",\"start_time\":\"2026-10-26T20:44:04.523000+00:00\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"7b57a843-c806-4551-9333-ae34c454ac27\"],\"Content-Length\":[\"112\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:04 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"112\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:44:04 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.712000-04:00",
+            "type": "WaitStateExited",
+            "id": 31,
+            "previousEventId": 30,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"experiment_id\":\"EXPLsNDeyePQjaFg2E\",\"state\":\"initiating\",\"start_time\":\"2026-10-26T20:44:04.523000+00:00\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"7b57a843-c806-4551-9333-ae34c454ac27\"],\"Content-Length\":[\"112\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:04 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"112\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:44:04 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.712000-04:00",
+            "type": "TaskStateEntered",
+            "id": 32,
+            "previousEventId": 31,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"experiment_id\":\"EXPLsNDeyePQjaFg2E\",\"state\":\"initiating\",\"start_time\":\"2026-10-26T20:44:04.523000+00:00\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"7b57a843-c806-4551-9333-ae34c454ac27\"],\"Content-Length\":[\"112\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:04 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"112\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:44:04 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=3734d1958628eaef;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"7b57a843-c806-4551-9333-ae34c454ac27\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.712000-04:00",
+            "type": "TaskScheduled",
+            "id": 33,
+            "previousEventId": 32,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.773000-04:00",
+            "type": "TaskStarted",
+            "id": 34,
+            "previousEventId": 33,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.807000-04:00",
+            "type": "TaskSucceeded",
+            "id": 35,
+            "previousEventId": 34,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.822000-04:00",
+            "type": "TaskStateExited",
+            "id": 36,
+            "previousEventId": 35,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.822000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 37,
+            "previousEventId": 36,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.822000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 38,
+            "previousEventId": 37,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:19.822000-04:00",
+            "type": "WaitStateEntered",
+            "id": 39,
+            "previousEventId": 38,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.855000-04:00",
+            "type": "WaitStateExited",
+            "id": 40,
+            "previousEventId": 39,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.855000-04:00",
+            "type": "TaskStateEntered",
+            "id": 41,
+            "previousEventId": 40,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:19 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:19 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"Q9HJJLAAH9BSI1JR7U08VPINT7VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.855000-04:00",
+            "type": "TaskScheduled",
+            "id": 42,
+            "previousEventId": 41,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.890000-04:00",
+            "type": "TaskStarted",
+            "id": 43,
+            "previousEventId": 42,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.976000-04:00",
+            "type": "TaskSucceeded",
+            "id": 44,
+            "previousEventId": 43,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.990000-04:00",
+            "type": "TaskStateExited",
+            "id": 45,
+            "previousEventId": 44,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.990000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 46,
+            "previousEventId": 45,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.990000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 47,
+            "previousEventId": 46,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:34.990000-04:00",
+            "type": "WaitStateEntered",
+            "id": 48,
+            "previousEventId": 47,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.034000-04:00",
+            "type": "WaitStateExited",
+            "id": 49,
+            "previousEventId": 48,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.034000-04:00",
+            "type": "TaskStateEntered",
+            "id": 50,
+            "previousEventId": 49,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:34 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:34 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"3U13MCK8QGLIONJKU2442GLBM3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.034000-04:00",
+            "type": "TaskScheduled",
+            "id": 51,
+            "previousEventId": 50,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.089000-04:00",
+            "type": "TaskStarted",
+            "id": 52,
+            "previousEventId": 51,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.137000-04:00",
+            "type": "TaskSucceeded",
+            "id": 53,
+            "previousEventId": 52,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.150000-04:00",
+            "type": "TaskStateExited",
+            "id": 54,
+            "previousEventId": 53,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.150000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 55,
+            "previousEventId": 54,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.150000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 56,
+            "previousEventId": 55,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:44:50.150000-04:00",
+            "type": "WaitStateEntered",
+            "id": 57,
+            "previousEventId": 56,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.189000-04:00",
+            "type": "WaitStateExited",
+            "id": 58,
+            "previousEventId": 57,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.189000-04:00",
+            "type": "TaskStateEntered",
+            "id": 59,
+            "previousEventId": 58,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:44:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:44:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"GEFKCI247I0BUIE20LUJ0DBII3VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.189000-04:00",
+            "type": "TaskScheduled",
+            "id": 60,
+            "previousEventId": 59,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.222000-04:00",
+            "type": "TaskStarted",
+            "id": 61,
+            "previousEventId": 60,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.255000-04:00",
+            "type": "TaskSucceeded",
+            "id": 62,
+            "previousEventId": 61,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.267000-04:00",
+            "type": "TaskStateExited",
+            "id": 63,
+            "previousEventId": 62,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.267000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 64,
+            "previousEventId": 63,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.267000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 65,
+            "previousEventId": 64,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:05.267000-04:00",
+            "type": "WaitStateEntered",
+            "id": 66,
+            "previousEventId": 65,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.311000-04:00",
+            "type": "WaitStateExited",
+            "id": 67,
+            "previousEventId": 66,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.311000-04:00",
+            "type": "TaskStateEntered",
+            "id": 68,
+            "previousEventId": 67,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:20:58.408Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:20:47.939Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:20:58.604Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"3024750072\"],\"Content-Length\":[\"597\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"597\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"3024750072\",\"x-amzn-requestid\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"O9P6FN3P959GEHGH9RENSN962JVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.311000-04:00",
+            "type": "TaskScheduled",
+            "id": 69,
+            "previousEventId": 68,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.344000-04:00",
+            "type": "TaskStarted",
+            "id": 70,
+            "previousEventId": 69,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.394000-04:00",
+            "type": "TaskSucceeded",
+            "id": 71,
+            "previousEventId": 70,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.407000-04:00",
+            "type": "TaskStateExited",
+            "id": 72,
+            "previousEventId": 71,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.407000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 73,
+            "previousEventId": 72,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.407000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 74,
+            "previousEventId": 73,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:20.407000-04:00",
+            "type": "WaitStateEntered",
+            "id": 75,
+            "previousEventId": 74,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.448000-04:00",
+            "type": "WaitStateExited",
+            "id": 76,
+            "previousEventId": 75,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.448000-04:00",
+            "type": "TaskStateEntered",
+            "id": 77,
+            "previousEventId": 76,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"1999327577\"],\"Content-Length\":[\"595\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:20 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"595\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:20 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"1999327577\",\"x-amzn-requestid\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"N988ALM79KDI2PUUUO9G27MMSNVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.448000-04:00",
+            "type": "TaskScheduled",
+            "id": 78,
+            "previousEventId": 77,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.471000-04:00",
+            "type": "TaskStarted",
+            "id": 79,
+            "previousEventId": 78,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.517000-04:00",
+            "type": "TaskSucceeded",
+            "id": 80,
+            "previousEventId": 79,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.530000-04:00",
+            "type": "TaskStateExited",
+            "id": 81,
+            "previousEventId": 80,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.530000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 82,
+            "previousEventId": 81,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.530000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 83,
+            "previousEventId": 82,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:35.530000-04:00",
+            "type": "WaitStateEntered",
+            "id": 84,
+            "previousEventId": 83,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.573000-04:00",
+            "type": "WaitStateExited",
+            "id": 85,
+            "previousEventId": 84,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.573000-04:00",
+            "type": "TaskStateEntered",
+            "id": 86,
+            "previousEventId": 85,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:35 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:35 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"HL5TIO7JGA13QGKC09EL5LLHMFVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.573000-04:00",
+            "type": "TaskScheduled",
+            "id": 87,
+            "previousEventId": 86,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.597000-04:00",
+            "type": "TaskStarted",
+            "id": 88,
+            "previousEventId": 87,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.646000-04:00",
+            "type": "TaskSucceeded",
+            "id": 89,
+            "previousEventId": 88,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.659000-04:00",
+            "type": "TaskStateExited",
+            "id": 90,
+            "previousEventId": 89,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.659000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 91,
+            "previousEventId": 90,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.659000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 92,
+            "previousEventId": 91,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:45:50.659000-04:00",
+            "type": "WaitStateEntered",
+            "id": 93,
+            "previousEventId": 92,
+            "stateEnteredEventDetails": {
+                "name": "WaitForRunbook",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.702000-04:00",
+            "type": "WaitStateExited",
+            "id": 94,
+            "previousEventId": 93,
+            "stateExitedEventDetails": {
+                "name": "WaitForRunbook",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.702000-04:00",
+            "type": "TaskStateEntered",
+            "id": 95,
+            "previousEventId": 94,
+            "stateEnteredEventDetails": {
+                "name": "PollDrState",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"FAILING_OVER\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"426025258\"],\"Content-Length\":[\"696\"],\"Date\":[\"Mon, 26 Oct 2026 20:45:50 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"696\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:45:50 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"426025258\",\"x-amzn-requestid\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"UU0GMTPHBO6P910P2PR9GABAMVVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.702000-04:00",
+            "type": "TaskScheduled",
+            "id": 96,
+            "previousEventId": 95,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.739000-04:00",
+            "type": "TaskStarted",
+            "id": 97,
+            "previousEventId": 96,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.782000-04:00",
+            "type": "TaskSucceeded",
+            "id": 98,
+            "previousEventId": 97,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"verified_at\":{\"S\":\"2026-10-26T20:46:00.967Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"SECONDARY_ACTIVE\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"428225587\"],\"Content-Length\":[\"747\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"747\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"428225587\",\"x-amzn-requestid\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.795000-04:00",
+            "type": "TaskStateExited",
+            "id": 99,
+            "previousEventId": 98,
+            "stateExitedEventDetails": {
+                "name": "PollDrState",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"verified_at\":{\"S\":\"2026-10-26T20:46:00.967Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"SECONDARY_ACTIVE\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"428225587\"],\"Content-Length\":[\"747\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"747\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"428225587\",\"x-amzn-requestid\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.795000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 100,
+            "previousEventId": 99,
+            "stateEnteredEventDetails": {
+                "name": "RunbookFinished",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"verified_at\":{\"S\":\"2026-10-26T20:46:00.967Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"SECONDARY_ACTIVE\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"428225587\"],\"Content-Length\":[\"747\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"747\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"428225587\",\"x-amzn-requestid\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.795000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 101,
+            "previousEventId": 100,
+            "stateExitedEventDetails": {
+                "name": "RunbookFinished",
+                "output": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"verified_at\":{\"S\":\"2026-10-26T20:46:00.967Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"SECONDARY_ACTIVE\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"428225587\"],\"Content-Length\":[\"747\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"747\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"428225587\",\"x-amzn-requestid\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.795000-04:00",
+            "type": "PassStateEntered",
+            "id": 102,
+            "previousEventId": 101,
+            "stateEnteredEventDetails": {
+                "name": "ChaosDone",
+                "input": "{\"Item\":{\"failback_completed_at\":{\"S\":\"2026-10-26T20:38:57.434Z\"},\"trigger_reason\":{\"S\":\"watchdog: 3 consecutive failed probes of primary /health\"},\"failover_started_at\":{\"S\":\"2026-10-26T20:45:08.954Z\"},\"failover_issued_at\":{\"S\":\"2026-10-26T20:45:09.195Z\"},\"manual_note\":{\"S\":\"manual reset after runbook bug (DbClusterArn casing)\"},\"detected_at\":{\"S\":\"2026-10-26T20:45:08.714Z\"},\"execution_id\":{\"S\":\"arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T204508Z\"},\"failback_started_at\":{\"S\":\"2026-10-26T20:37:29.454Z\"},\"first_failure_at\":{\"S\":\"2026-10-26T20:44:58.336Z\"},\"verified_at\":{\"S\":\"2026-10-26T20:46:00.967Z\"},\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"SECONDARY_ACTIVE\"},\"promoted_at\":{\"S\":\"2026-10-26T20:45:29.731Z\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"428225587\"],\"Content-Length\":[\"747\"],\"Date\":[\"Mon, 26 Oct 2026 20:46:05 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"747\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:46:05 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"428225587\",\"x-amzn-requestid\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"53TK96VH8C6SRMBETIEKCR48BRVV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:46:05.795000-04:00",
+            "type": "PassStateExited",
+            "id": 103,
+            "previousEventId": 102,
+            "stateExitedEventDetails": {
+                "name": "ChaosDone",
+                "output": "{\"dr_state\":\"SECONDARY_ACTIVE\",\"experiment_id\":\"EXPLsNDeyePQjaFg2E\"}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.588000-04:00",
+            "type": "TaskSucceeded",
+            "id": 104,
+            "previousEventId": 23,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"samples_key\":\"drills/drill-20261026T204238Z/samples.jsonl\",\"sample_count\":271,\"acked_count\":142,\"stop_reason\":\"recovered\",\"started_at\":1.7930473843977144E9,\"ended_at\":1.7930476555783951E9},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"ab03d78f-be94-4f1e-ad1e-17de3a233e80\"],\"Content-Length\":[\"197\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:35 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=481bb6a9cec44fb5;Sampled=1;Lineage=1:f09490fd:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"197\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:35 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"ab03d78f-be94-4f1e-ad1e-17de3a233e80\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=481bb6a9cec44fb5;Sampled=1;Lineage=1:f09490fd:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"ab03d78f-be94-4f1e-ad1e-17de3a233e80\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.602000-04:00",
+            "type": "TaskStateExited",
+            "id": 105,
+            "previousEventId": 104,
+            "stateExitedEventDetails": {
+                "name": "Probe",
+                "output": "{\"samples_key\":\"drills/drill-20261026T204238Z/samples.jsonl\",\"sample_count\":271,\"acked_count\":142,\"stop_reason\":\"recovered\",\"started_at\":1.7930473843977144E9,\"ended_at\":1.7930476555783951E9}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.602000-04:00",
+            "type": "ParallelStateSucceeded",
+            "id": 106,
+            "previousEventId": 105
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.602000-04:00",
+            "type": "ParallelStateExited",
+            "id": 107,
+            "previousEventId": 105,
+            "stateExitedEventDetails": {
+                "name": "RunDrill",
+                "output": "[{\"samples_key\":\"drills/drill-20261026T204238Z/samples.jsonl\",\"sample_count\":271,\"acked_count\":142,\"stop_reason\":\"recovered\",\"started_at\":1.7930473843977144E9,\"ended_at\":1.7930476555783951E9},{\"dr_state\":\"SECONDARY_ACTIVE\",\"experiment_id\":\"EXPLsNDeyePQjaFg2E\"}]",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.602000-04:00",
+            "type": "TaskStateEntered",
+            "id": 108,
+            "previousEventId": 107,
+            "stateEnteredEventDetails": {
+                "name": "Analyze",
+                "input": "[{\"samples_key\":\"drills/drill-20261026T204238Z/samples.jsonl\",\"sample_count\":271,\"acked_count\":142,\"stop_reason\":\"recovered\",\"started_at\":1.7930473843977144E9,\"ended_at\":1.7930476555783951E9},{\"dr_state\":\"SECONDARY_ACTIVE\",\"experiment_id\":\"EXPLsNDeyePQjaFg2E\"}]",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.602000-04:00",
+            "type": "TaskScheduled",
+            "id": 109,
+            "previousEventId": 108,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-analyzer\",\"Payload\":{\"dr_state\":\"SECONDARY_ACTIVE\",\"experiment_id\":\"EXPLsNDeyePQjaFg2E\",\"probe\":{\"samples_key\":\"drills/drill-20261026T204238Z/samples.jsonl\",\"sample_count\":271,\"acked_count\":142,\"stop_reason\":\"recovered\",\"started_at\":1.7930473843977144E9,\"ended_at\":1.7930476555783951E9},\"run_id\":\"drill-20261026T204238Z\",\"started_at\":\"2026-10-26T20:43:03.134Z\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:35.641000-04:00",
+            "type": "TaskStarted",
+            "id": 110,
+            "previousEventId": 109,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.345000-04:00",
+            "type": "TaskSucceeded",
+            "id": 111,
+            "previousEventId": 110,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"verdict\":\"FAIL\",\"evidence_key\":\"drills/drill-20261026T204238Z/result.json\",\"rto_seconds\":129.121,\"rpo_seconds\":32.993,\"reasons\":[\"dynamodb: RPO 33.0s exceeds target 5s (33 acknowledged writes lost)\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"b332c915-38e2-4e70-be91-939e22b6501c\"],\"Content-Length\":[\"211\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=6ae769901b8d59ad;Sampled=1;Lineage=1:52091f68:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"211\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"b332c915-38e2-4e70-be91-939e22b6501c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=6ae769901b8d59ad;Sampled=1;Lineage=1:52091f68:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"b332c915-38e2-4e70-be91-939e22b6501c\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.361000-04:00",
+            "type": "TaskStateExited",
+            "id": 112,
+            "previousEventId": 111,
+            "stateExitedEventDetails": {
+                "name": "Analyze",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"verdict\":\"FAIL\",\"evidence_key\":\"drills/drill-20261026T204238Z/result.json\",\"rto_seconds\":129.121,\"rpo_seconds\":32.993,\"reasons\":[\"dynamodb: RPO 33.0s exceeds target 5s (33 acknowledged writes lost)\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"b332c915-38e2-4e70-be91-939e22b6501c\"],\"Content-Length\":[\"211\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=6ae769901b8d59ad;Sampled=1;Lineage=1:52091f68:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"211\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"b332c915-38e2-4e70-be91-939e22b6501c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=6ae769901b8d59ad;Sampled=1;Lineage=1:52091f68:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"b332c915-38e2-4e70-be91-939e22b6501c\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.361000-04:00",
+            "type": "TaskStateEntered",
+            "id": 113,
+            "previousEventId": 112,
+            "stateEnteredEventDetails": {
+                "name": "StopFault",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"verdict\":\"FAIL\",\"evidence_key\":\"drills/drill-20261026T204238Z/result.json\",\"rto_seconds\":129.121,\"rpo_seconds\":32.993,\"reasons\":[\"dynamodb: RPO 33.0s exceeds target 5s (33 acknowledged writes lost)\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"b332c915-38e2-4e70-be91-939e22b6501c\"],\"Content-Length\":[\"211\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=6ae769901b8d59ad;Sampled=1;Lineage=1:52091f68:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"211\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"b332c915-38e2-4e70-be91-939e22b6501c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=6ae769901b8d59ad;Sampled=1;Lineage=1:52091f68:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"b332c915-38e2-4e70-be91-939e22b6501c\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.361000-04:00",
+            "type": "TaskScheduled",
+            "id": 114,
+            "previousEventId": 113,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"stop_experiments\",\"run_id\":\"drill-20261026T204238Z\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.398000-04:00",
+            "type": "TaskStarted",
+            "id": 115,
+            "previousEventId": 114,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.838000-04:00",
+            "type": "TaskSucceeded",
+            "id": 116,
+            "previousEventId": 115,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[\"EXPLsNDeyePQjaFg2E\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"],\"Content-Length\":[\"35\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"35\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.850000-04:00",
+            "type": "TaskStateExited",
+            "id": 117,
+            "previousEventId": 116,
+            "stateExitedEventDetails": {
+                "name": "StopFault",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[\"EXPLsNDeyePQjaFg2E\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"],\"Content-Length\":[\"35\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"35\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.850000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 118,
+            "previousEventId": 117,
+            "stateEnteredEventDetails": {
+                "name": "ShouldFailBack",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[\"EXPLsNDeyePQjaFg2E\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"],\"Content-Length\":[\"35\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"35\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.850000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 119,
+            "previousEventId": 118,
+            "stateExitedEventDetails": {
+                "name": "ShouldFailBack",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[\"EXPLsNDeyePQjaFg2E\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"],\"Content-Length\":[\"35\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"35\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.850000-04:00",
+            "type": "SucceedStateEntered",
+            "id": 120,
+            "previousEventId": 119,
+            "stateEnteredEventDetails": {
+                "name": "Finish",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[\"EXPLsNDeyePQjaFg2E\"]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"],\"Content-Length\":[\"35\"],\"Date\":[\"Mon, 26 Oct 2026 20:47:37 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"35\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:47:37 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\",\"X-Amzn-Trace-Id\":\"Root=1-6adfbb57-abc6068500efa7132d8e04ec;Parent=30cd90442444e59c;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"24f0a9fd-8c23-45cf-858f-130ca059aa2c\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.850000-04:00",
+            "type": "SucceedStateExited",
+            "id": 121,
+            "previousEventId": 120,
+            "stateExitedEventDetails": {
+                "name": "Finish",
+                "output": "{\"evidence_key\":\"drills/drill-20261026T204238Z/result.json\",\"failback\":\"SKIPPED\",\"rpo_seconds\":32.993,\"rto_seconds\":129.121,\"run_id\":\"drill-20261026T204238Z\",\"verdict\":\"FAIL\"}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:47:37.875000-04:00",
+            "type": "ExecutionSucceeded",
+            "id": 122,
+            "previousEventId": 121,
+            "executionSucceededEventDetails": {
+                "output": "{\"evidence_key\":\"drills/drill-20261026T204238Z/result.json\",\"failback\":\"SKIPPED\",\"rpo_seconds\":32.993,\"rto_seconds\":129.121,\"run_id\":\"drill-20261026T204238Z\",\"verdict\":\"FAIL\"}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        }
+    ]
+}

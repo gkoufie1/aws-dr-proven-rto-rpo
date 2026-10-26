@@ -1,0 +1,463 @@
+{
+    "events": [
+        {
+            "timestamp": "2026-10-26T16:14:17.506000-04:00",
+            "type": "ExecutionStarted",
+            "id": 1,
+            "previousEventId": 0,
+            "executionStartedEventDetails": {
+                "input": "{\"failback\": false}",
+                "inputDetails": {
+                    "truncated": false
+                },
+                "roleArn": "arn:aws:iam::829241815848:role/dr-proof-drill"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.524000-04:00",
+            "type": "PassStateEntered",
+            "id": 2,
+            "previousEventId": 0,
+            "stateEnteredEventDetails": {
+                "name": "Init",
+                "input": "{\"failback\": false}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.524000-04:00",
+            "type": "PassStateExited",
+            "id": 3,
+            "previousEventId": 2,
+            "stateExitedEventDetails": {
+                "name": "Init",
+                "output": "{\"failback\": false}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.524000-04:00",
+            "type": "TaskStateEntered",
+            "id": 4,
+            "previousEventId": 3,
+            "stateEnteredEventDetails": {
+                "name": "ReadDrState",
+                "input": "{\"failback\": false}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.524000-04:00",
+            "type": "TaskScheduled",
+            "id": 5,
+            "previousEventId": 4,
+            "taskScheduledEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "region": "us-west-2",
+                "parameters": "{\"ConsistentRead\":true,\"Key\":{\"pk\":{\"S\":\"failover\"}},\"TableName\":\"dr-proof-dr-state\"}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.583000-04:00",
+            "type": "TaskStarted",
+            "id": 6,
+            "previousEventId": 5,
+            "taskStartedEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.640000-04:00",
+            "type": "TaskSucceeded",
+            "id": 7,
+            "previousEventId": 6,
+            "taskSucceededEventDetails": {
+                "resourceType": "dynamodb",
+                "resource": "getItem",
+                "output": "{\"Item\":{\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"4053899424\"],\"Content-Length\":[\"63\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:17 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"63\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:14:17 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"4053899424\",\"x-amzn-requestid\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.651000-04:00",
+            "type": "TaskStateExited",
+            "id": 8,
+            "previousEventId": 7,
+            "stateExitedEventDetails": {
+                "name": "ReadDrState",
+                "output": "{\"Item\":{\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"4053899424\"],\"Content-Length\":[\"63\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:17 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"63\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:14:17 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"4053899424\",\"x-amzn-requestid\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.651000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 9,
+            "previousEventId": 8,
+            "stateEnteredEventDetails": {
+                "name": "SteadyState",
+                "input": "{\"Item\":{\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"4053899424\"],\"Content-Length\":[\"63\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:17 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"63\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:14:17 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"4053899424\",\"x-amzn-requestid\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.651000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 10,
+            "previousEventId": 9,
+            "stateExitedEventDetails": {
+                "name": "SteadyState",
+                "output": "{\"Item\":{\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"4053899424\"],\"Content-Length\":[\"63\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:17 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"63\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:14:17 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"4053899424\",\"x-amzn-requestid\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.651000-04:00",
+            "type": "TaskStateEntered",
+            "id": 11,
+            "previousEventId": 10,
+            "stateEnteredEventDetails": {
+                "name": "CheckPrimaryHealth",
+                "input": "{\"Item\":{\"pk\":{\"S\":\"failover\"},\"state\":{\"S\":\"PRIMARY_ACTIVE\"}},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"Server\":[\"Server\"],\"x-amzn-requestid\":[\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"],\"Connection\":[\"keep-alive\"],\"x-amz-crc32\":[\"4053899424\"],\"Content-Length\":[\"63\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:17 GMT\"],\"Content-Type\":[\"application/x-amz-json-1.0\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"63\",\"Content-Type\":\"application/x-amz-json-1.0\",\"Date\":\"Mon, 26 Oct 2026 20:14:17 GMT\",\"Server\":\"Server\",\"x-amz-crc32\":\"4053899424\",\"x-amzn-requestid\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"8V7JUJ2J51FETG9MC061N7NE47VV4KQNSO5AEMVJF66Q9ASUAAJG\"}}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.651000-04:00",
+            "type": "TaskScheduled",
+            "id": 12,
+            "previousEventId": 11,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"check_health\",\"url\":\"https://bmfmlpybnb.execute-api.us-east-1.amazonaws.com/health\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:17.692000-04:00",
+            "type": "TaskStarted",
+            "id": 13,
+            "previousEventId": 12,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.615000-04:00",
+            "type": "TaskSucceeded",
+            "id": 14,
+            "previousEventId": 13,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "TaskStateExited",
+            "id": 15,
+            "previousEventId": 14,
+            "stateExitedEventDetails": {
+                "name": "CheckPrimaryHealth",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "ChoiceStateEntered",
+            "id": 16,
+            "previousEventId": 15,
+            "stateEnteredEventDetails": {
+                "name": "PrimaryHealthy",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "ChoiceStateExited",
+            "id": 17,
+            "previousEventId": 16,
+            "stateExitedEventDetails": {
+                "name": "PrimaryHealthy",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "ParallelStateEntered",
+            "id": 18,
+            "previousEventId": 17,
+            "stateEnteredEventDetails": {
+                "name": "RunDrill",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "ParallelStateStarted",
+            "id": 19,
+            "previousEventId": 18
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "TaskStateEntered",
+            "id": 20,
+            "previousEventId": 19,
+            "stateEnteredEventDetails": {
+                "name": "Probe",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "TaskScheduled",
+            "id": 21,
+            "previousEventId": 20,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-prober\",\"Payload\":{\"max_seconds\":840,\"no_fault_timeout_seconds\":420,\"recovery_success_threshold\":30,\"run_id\":\"drill-20261026T201353Z\"}}",
+                "timeoutInSeconds": 900
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.627000-04:00",
+            "type": "WaitStateEntered",
+            "id": 22,
+            "previousEventId": 19,
+            "stateEnteredEventDetails": {
+                "name": "Baseline",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:14:18.667000-04:00",
+            "type": "TaskStarted",
+            "id": 23,
+            "previousEventId": 21,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:18.669000-04:00",
+            "type": "WaitStateExited",
+            "id": 24,
+            "previousEventId": 22,
+            "stateExitedEventDetails": {
+                "name": "Baseline",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:18.669000-04:00",
+            "type": "TaskStateEntered",
+            "id": 25,
+            "previousEventId": 24,
+            "stateEnteredEventDetails": {
+                "name": "InjectFault",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"healthy\":true,\"status\":200,\"region\":\"us-east-1\"},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c360387a-a0f6-4324-857e-dd85a677825f\"],\"Content-Length\":[\"55\"],\"Date\":[\"Mon, 26 Oct 2026 20:14:18 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"55\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:14:18 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=2c97235b505ecd9a;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c360387a-a0f6-4324-857e-dd85a677825f\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:18.669000-04:00",
+            "type": "TaskScheduled",
+            "id": 26,
+            "previousEventId": 25,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"start_experiment\",\"run_id\":\"drill-20261026T201353Z\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:18.709000-04:00",
+            "type": "TaskStarted",
+            "id": 27,
+            "previousEventId": 26,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.098000-04:00",
+            "type": "TaskFailed",
+            "id": 28,
+            "previousEventId": 27,
+            "taskFailedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "error": "ClientError",
+                "cause": "{\"errorMessage\":\"An error occurred (AccessDeniedException) when calling the StartExperiment operation: User: arn:aws:sts::829241815848:assumed-role/dr-proof-drill-control/dr-proof-drill-control is not authorized to perform: iam:CreateServiceLinkedRole on resource: arn:aws:iam::829241815848:role/aws-service-role/fis.amazonaws.com/AWSServiceRoleForFIS because no identity-based policy allows the iam:CreateServiceLinkedRole action\",\"errorType\":\"ClientError\",\"requestId\":\"84c69c1f-4287-420e-a65c-47c00bf2fa72\",\"stackTrace\":[\"  File \\\"/var/task/handler.py\\\", line 73, in handler\\n    return start_experiment(event[\\\"run_id\\\"])\\n\",\"  File \\\"/var/task/handler.py\\\", line 38, in start_experiment\\n    exp = _fis.start_experiment(\\n\",\"  File \\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\", line 606, in _api_call\\n    return self._make_api_call(operation_name, kwargs)\\n\",\"  File \\\"/var/lang/lib/python3.12/site-packages/botocore/context.py\\\", line 123, in wrapper\\n    return func(*args, **kwargs)\\n\",\"  File \\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\", line 1094, in _make_api_call\\n    raise error_class(parsed_response, operation_name)\\n\"]}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.109000-04:00",
+            "type": "TaskStateAborted",
+            "id": 29,
+            "previousEventId": 28
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.109000-04:00",
+            "type": "TaskStateAborted",
+            "id": 30,
+            "previousEventId": 28
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.109000-04:00",
+            "type": "ParallelStateFailed",
+            "id": 31,
+            "previousEventId": 28
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.109000-04:00",
+            "type": "ParallelStateExited",
+            "id": 32,
+            "previousEventId": 31,
+            "stateExitedEventDetails": {
+                "name": "RunDrill",
+                "output": "{\"Error\":\"ClientError\",\"Cause\":\"{\\\"errorMessage\\\":\\\"An error occurred (AccessDeniedException) when calling the StartExperiment operation: User: arn:aws:sts::829241815848:assumed-role/dr-proof-drill-control/dr-proof-drill-control is not authorized to perform: iam:CreateServiceLinkedRole on resource: arn:aws:iam::829241815848:role/aws-service-role/fis.amazonaws.com/AWSServiceRoleForFIS because no identity-based policy allows the iam:CreateServiceLinkedRole action\\\",\\\"errorType\\\":\\\"ClientError\\\",\\\"requestId\\\":\\\"84c69c1f-4287-420e-a65c-47c00bf2fa72\\\",\\\"stackTrace\\\":[\\\"  File \\\\\\\"/var/task/handler.py\\\\\\\", line 73, in handler\\\\n    return start_experiment(event[\\\\\\\"run_id\\\\\\\"])\\\\n\\\",\\\"  File \\\\\\\"/var/task/handler.py\\\\\\\", line 38, in start_experiment\\\\n    exp = _fis.start_experiment(\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\\\\\", line 606, in _api_call\\\\n    return self._make_api_call(operation_name, kwargs)\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/context.py\\\\\\\", line 123, in wrapper\\\\n    return func(*args, **kwargs)\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\\\\\", line 1094, in _make_api_call\\\\n    raise error_class(parsed_response, operation_name)\\\\n\\\"]}\"}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.109000-04:00",
+            "type": "TaskStateEntered",
+            "id": 33,
+            "previousEventId": 32,
+            "stateEnteredEventDetails": {
+                "name": "AbortStopFault",
+                "input": "{\"Error\":\"ClientError\",\"Cause\":\"{\\\"errorMessage\\\":\\\"An error occurred (AccessDeniedException) when calling the StartExperiment operation: User: arn:aws:sts::829241815848:assumed-role/dr-proof-drill-control/dr-proof-drill-control is not authorized to perform: iam:CreateServiceLinkedRole on resource: arn:aws:iam::829241815848:role/aws-service-role/fis.amazonaws.com/AWSServiceRoleForFIS because no identity-based policy allows the iam:CreateServiceLinkedRole action\\\",\\\"errorType\\\":\\\"ClientError\\\",\\\"requestId\\\":\\\"84c69c1f-4287-420e-a65c-47c00bf2fa72\\\",\\\"stackTrace\\\":[\\\"  File \\\\\\\"/var/task/handler.py\\\\\\\", line 73, in handler\\\\n    return start_experiment(event[\\\\\\\"run_id\\\\\\\"])\\\\n\\\",\\\"  File \\\\\\\"/var/task/handler.py\\\\\\\", line 38, in start_experiment\\\\n    exp = _fis.start_experiment(\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\\\\\", line 606, in _api_call\\\\n    return self._make_api_call(operation_name, kwargs)\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/context.py\\\\\\\", line 123, in wrapper\\\\n    return func(*args, **kwargs)\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\\\\\", line 1094, in _make_api_call\\\\n    raise error_class(parsed_response, operation_name)\\\\n\\\"]}\"}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.109000-04:00",
+            "type": "TaskScheduled",
+            "id": 34,
+            "previousEventId": 33,
+            "taskScheduledEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "region": "us-west-2",
+                "parameters": "{\"FunctionName\":\"arn:aws:lambda:us-west-2:829241815848:function:dr-proof-drill-control\",\"Payload\":{\"action\":\"stop_experiments\",\"run_id\":\"drill-20261026T201353Z\"}}"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.151000-04:00",
+            "type": "TaskStarted",
+            "id": 35,
+            "previousEventId": 34,
+            "taskStartedEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke"
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.336000-04:00",
+            "type": "TaskSucceeded",
+            "id": 36,
+            "previousEventId": 35,
+            "taskSucceededEventDetails": {
+                "resourceType": "lambda",
+                "resource": "invoke",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c9f3ca30-a744-4b8f-9289-21d245679edf\"],\"Content-Length\":[\"15\"],\"Date\":[\"Mon, 26 Oct 2026 20:15:19 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=5c7604fcf52e8021;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"15\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:15:19 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c9f3ca30-a744-4b8f-9289-21d245679edf\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=5c7604fcf52e8021;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c9f3ca30-a744-4b8f-9289-21d245679edf\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.348000-04:00",
+            "type": "TaskStateExited",
+            "id": 37,
+            "previousEventId": 36,
+            "stateExitedEventDetails": {
+                "name": "AbortStopFault",
+                "output": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c9f3ca30-a744-4b8f-9289-21d245679edf\"],\"Content-Length\":[\"15\"],\"Date\":[\"Mon, 26 Oct 2026 20:15:19 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=5c7604fcf52e8021;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"15\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:15:19 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c9f3ca30-a744-4b8f-9289-21d245679edf\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=5c7604fcf52e8021;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c9f3ca30-a744-4b8f-9289-21d245679edf\"},\"StatusCode\":200}",
+                "outputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.348000-04:00",
+            "type": "FailStateEntered",
+            "id": 38,
+            "previousEventId": 37,
+            "stateEnteredEventDetails": {
+                "name": "DrillErrored",
+                "input": "{\"ExecutedVersion\":\"$LATEST\",\"Payload\":{\"stopped\":[]},\"SdkHttpMetadata\":{\"AllHttpHeaders\":{\"X-Amz-Executed-Version\":[\"$LATEST\"],\"x-amzn-Remapped-Content-Length\":[\"0\"],\"Connection\":[\"keep-alive\"],\"x-amzn-RequestId\":[\"c9f3ca30-a744-4b8f-9289-21d245679edf\"],\"Content-Length\":[\"15\"],\"Date\":[\"Mon, 26 Oct 2026 20:15:19 GMT\"],\"X-Amzn-Trace-Id\":[\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=5c7604fcf52e8021;Sampled=1;Lineage=1:d203c406:0\"],\"Content-Type\":[\"application/json\"]},\"HttpHeaders\":{\"Connection\":\"keep-alive\",\"Content-Length\":\"15\",\"Content-Type\":\"application/json\",\"Date\":\"Mon, 26 Oct 2026 20:15:19 GMT\",\"X-Amz-Executed-Version\":\"$LATEST\",\"x-amzn-Remapped-Content-Length\":\"0\",\"x-amzn-RequestId\":\"c9f3ca30-a744-4b8f-9289-21d245679edf\",\"X-Amzn-Trace-Id\":\"Root=1-6adfb499-064e38b98b91b2fb170081cc;Parent=5c7604fcf52e8021;Sampled=1;Lineage=1:d203c406:0\"},\"HttpStatusCode\":200},\"SdkResponseMetadata\":{\"RequestId\":\"c9f3ca30-a744-4b8f-9289-21d245679edf\"},\"StatusCode\":200}",
+                "inputDetails": {
+                    "truncated": false
+                }
+            }
+        },
+        {
+            "timestamp": "2026-10-26T16:15:19.377000-04:00",
+            "type": "ExecutionFailed",
+            "id": 39,
+            "previousEventId": 38,
+            "executionFailedEventDetails": {
+                "error": "DrillErrored",
+                "cause": "{\"Error\":\"ClientError\",\"Cause\":\"{\\\"errorMessage\\\":\\\"An error occurred (AccessDeniedException) when calling the StartExperiment operation: User: arn:aws:sts::829241815848:assumed-role/dr-proof-drill-control/dr-proof-drill-control is not authorized to perform: iam:CreateServiceLinkedRole on resource: arn:aws:iam::829241815848:role/aws-service-role/fis.amazonaws.com/AWSServiceRoleForFIS because no identity-based policy allows the iam:CreateServiceLinkedRole action\\\",\\\"errorType\\\":\\\"ClientError\\\",\\\"requestId\\\":\\\"84c69c1f-4287-420e-a65c-47c00bf2fa72\\\",\\\"stackTrace\\\":[\\\"  File \\\\\\\"/var/task/handler.py\\\\\\\", line 73, in handler\\\\n    return start_experiment(event[\\\\\\\"run_id\\\\\\\"])\\\\n\\\",\\\"  File \\\\\\\"/var/task/handler.py\\\\\\\", line 38, in start_experiment\\\\n    exp = _fis.start_experiment(\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\\\\\", line 606, in _api_call\\\\n    return self._make_api_call(operation_name, kwargs)\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/context.py\\\\\\\", line 123, in wrapper\\\\n    return func(*args, **kwargs)\\\\n\\\",\\\"  File \\\\\\\"/var/lang/lib/python3.12/site-packages/botocore/client.py\\\\\\\", line 1094, in _make_api_call\\\\n    raise error_class(parsed_response, operation_name)\\\\n\\\"]}\"}"
+            }
+        }
+    ]
+}

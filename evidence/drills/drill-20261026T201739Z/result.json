@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "run_id": "drill-20261026T201739Z",
+  "scenario": "region-impairment",
+  "fault": "Impair the primary region: API Lambda fails every invocation and DynamoDB replication is severed.",
+  "regions": {
+    "primary": "us-east-1",
+    "secondary": "us-west-2"
+  },
+  "targets": {
+    "rto_seconds": 300.0,
+    "rpo_seconds": 5.0
+  },
+  "drill_started_at": "2026-10-26T20:18:03.382Z",
+  "generated_at": "2026-10-26T20:37:07.006Z",
+  "probe_stop_reason": "recovered",
+  "runbook": {
+    "final_state": "FAILING_OVER",
+    "trigger_reason": "watchdog: 3 consecutive failed probes of primary /health",
+    "execution_id": "arn:aws:states:us-west-2:829241815848:execution:dr-proof-failover:auto-20261026T202058Z",
+    "last_error": null
+  },
+  "experiment": {
+    "id": "EXPeWZSMqdsdEY4JPU",
+    "template_id": "EXT97HuqpsBJvxSR6",
+    "status": "completed",
+    "start_time": "2026-10-26T20:19:04.685000+00:00",
+    "actions": {
+      "fail-primary-api": {
+        "status": "completed",
+        "start_time": "2026-10-26T20:19:31.996000+00:00",
+        "end_time": "2026-10-26T20:29:32.966000+00:00"
+      },
+      "sever-ledger-replication": {
+        "status": "completed",
+        "start_time": "2026-10-26T20:19:53.306000+00:00",
+        "end_time": "2026-10-26T20:29:54.209000+00:00"
+      }
+    }
+  },
+  "replication_lag_before_outage": {
+    "aurora_replication_lag_ms_max": 961.0,
+    "aurora_rpo_lag_ms_max": 1043.0,
+    "dynamodb_replication_latency_ms_max": 1129.0
+  },
+  "verdict": "FAIL",
+  "reasons": [
+    "failover runbook did not complete (final state FAILING_OVER)"
+  ],
+  "rto_seconds": 207.117,
+  "rpo_seconds": 0.0,
+  "rpo_by_store": {
+    "aurora": {
+      "verified": true,
+      "acknowledged_by_old_primary": 128,
+      "lost_writes": 0,
+      "lost_seqs": [],
+      "rpo_seconds": 0.0
+    },
+    "dynamodb": {
+      "verified": true,
+      "acknowledged_by_old_primary": 128,
+      "lost_writes": 0,
+      "lost_seqs": [],
+      "rpo_seconds": 0.0
+    }
+  },
+  "phases": {
+    "fault_to_first_error": 6.452,
+    "detection": 79.96,
+    "runbook_start": 0.196,
+    "db_promotion": null,
+    "dr_verification": null,
+    "dns_and_client": null
+  },
+  "probe": {
+    "total": 331,
+    "acked": 158,
+    "failed": 173,
+    "resolution_seconds": 1.0,
+    "first_failure_seq": 94,
+    "recovery_seq": 301,
+    "recovered_region": "us-west-2"
+  },
+  "timestamps": {
+    "fault_injected_at": "2026-10-26T20:19:31.996Z",
+    "outage_start": "2026-10-26T20:19:38.448Z",
+    "detected_at": "2026-10-26T20:20:58.408Z",
+    "failover_started_at": "2026-10-26T20:20:58.604Z",
+    "failover_issued_at": null,
+    "promoted_at": null,
+    "verified_at": null,
+    "recovered_at": "2026-10-26T20:23:05.565Z"
+  }
+}
