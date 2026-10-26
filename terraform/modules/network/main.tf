@@ -3,12 +3,11 @@
 # Data API (HTTPS, IAM-authenticated), so there is no NAT gateway to pay for
 # and no inbound path to the database at all.
 
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
+# AZs are passed in explicitly rather than discovered: a lookup's result can
+# change when AWS adds or retires a zone, which would make Terraform want to
+# replace the subnets under a live Aurora cluster.
 locals {
-  azs = slice(data.aws_availability_zones.available.names, 0, 3)
+  azs = var.availability_zones
 }
 
 resource "aws_vpc" "this" {
