@@ -7,10 +7,12 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TFDIR="$ROOT/terraform"
+# cd rather than -chdir: terraform.exe on Windows cannot parse Git Bash paths.
+tf() { (cd "$TFDIR" && terraform "$@"); }
 
 # Stop any FIS experiment still running so it doesn't hold targets.
-if PRIMARY="$(terraform -chdir="$TFDIR" output -raw primary_region 2>/dev/null)" &&
-   TEMPLATE="$(terraform -chdir="$TFDIR" output -raw fis_experiment_template_id 2>/dev/null)"; then
+if PRIMARY="$(tf output -raw primary_region 2>/dev/null)" &&
+   TEMPLATE="$(tf output -raw fis_experiment_template_id 2>/dev/null)"; then
   for id in $(aws fis list-experiments --region "$PRIMARY" \
       --query "experiments[?experimentTemplateId=='${TEMPLATE}' && contains(['pending','initiating','running'], state.status)].id" \
       --output text 2>/dev/null); do
@@ -23,8 +25,8 @@ fi
 # failover the writer may be the "secondary" Terraform resource, and RDS will
 # not delete the writer instance of a global primary that still has members.
 # Detached clusters are plain regional clusters Terraform can delete in order.
-if GLOBAL="$(terraform -chdir="$TFDIR" output -raw global_cluster_id 2>/dev/null)" &&
-   SECONDARY="$(terraform -chdir="$TFDIR" output -raw secondary_region 2>/dev/null)"; then
+if GLOBAL="$(tf output -raw global_cluster_id 2>/dev/null)" &&
+   SECONDARY="$(tf output -raw secondary_region 2>/dev/null)"; then
   members="$(aws rds describe-global-clusters --region "$SECONDARY" --global-cluster-identifier "$GLOBAL" \
     --query 'GlobalClusters[0].GlobalClusterMembers[].[IsWriter,DBClusterArn]' --output text 2>/dev/null || true)"
   # readers (False) before the writer (True)
@@ -42,7 +44,7 @@ fi
 
 for attempt in 1 2 3; do
   echo "terraform destroy (attempt ${attempt})"
-  if terraform -chdir="$TFDIR" destroy -auto-approve -input=false "$@"; then
+  if tf destroy -auto-approve -input=false "$@"; then
     echo "destroyed"; exit 0
   fi
   echo "destroy failed; waiting 120 s for RDS to settle" >&2

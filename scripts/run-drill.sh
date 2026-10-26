@@ -8,7 +8,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-tf() { terraform -chdir="$ROOT/terraform" output -raw "$1"; }
+# cd rather than -chdir: terraform.exe on Windows cannot parse Git Bash paths.
+tf() { (cd "$ROOT/terraform" && terraform output -raw "$1"); }
 
 FAILBACK=false
 [[ "${1:-}" == "--failback" ]] && FAILBACK=true
@@ -60,7 +61,10 @@ echo; echo "execution status: ${status}"
 
 DEST="$ROOT/evidence/drills/$RUN_ID"
 mkdir -p "$DEST"
-aws s3 cp --region "$REGION" --recursive --only-show-errors "s3://${BUCKET}/drills/${RUN_ID}/" "$DEST/" || true
+# Native tools (aws.exe, python.exe) on Windows need a Windows path, not /c/...
+NATIVE_DEST="$DEST"
+command -v cygpath >/dev/null 2>&1 && NATIVE_DEST="$(cygpath -m "$DEST")"
+aws s3 cp --region "$REGION" --recursive --only-show-errors "s3://${BUCKET}/drills/${RUN_ID}/" "$NATIVE_DEST/" || true
 
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
   echo "run_id=${RUN_ID}" >> "$GITHUB_OUTPUT"
@@ -72,7 +76,8 @@ if [[ ! -f "$DEST/result.json" ]]; then
   exit 2
 fi
 
-python3 - "$DEST/result.json" <<'PY'
+PY_BIN="$(command -v python || command -v python3)"
+"$PY_BIN" - "$NATIVE_DEST/result.json" <<'PY'
 import json, sys
 r = json.load(open(sys.argv[1]))
 print(f"verdict: {r['verdict']}")
