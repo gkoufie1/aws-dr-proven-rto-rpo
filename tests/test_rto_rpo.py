@@ -159,6 +159,18 @@ def test_phase_breakdown_uses_runbook_timestamps():
     assert ph["dns_and_client"] == pytest.approx(120.2 - 81)
 
 
+def test_client_recovered_but_runbook_stuck_fails():
+    # Real case from the first drill: Aurora promoted and DNS moved, but the
+    # runbook never recognised the promotion and stayed in FAILING_OVER.
+    samples = make_samples("p" * 60 + "x" * 120 + "s" * 30)
+    everything = acked_seqs(samples)
+    r = run(samples, {"aurora": everything, "dynamodb": everything}, runbook_state="FAILING_OVER")
+
+    assert r["verdict"] == rto_rpo.FAIL
+    assert r["rto_seconds"] == pytest.approx(120.2)  # still measured and reported
+    assert any("runbook did not complete" in reason for reason in r["reasons"])
+
+
 def test_parse_ts_handles_step_functions_and_sentinels():
     assert rto_rpo.parse_ts("2026-10-26T12:00:00.123Z") == pytest.approx(1793016000.123)
     assert rto_rpo.parse_ts("n/a") is None

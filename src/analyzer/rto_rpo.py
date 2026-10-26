@@ -81,6 +81,7 @@ def compute(
     surviving: dict[str, Iterable[int] | None],
     timeline: dict | None = None,
     fault_injected_at: float | None = None,
+    runbook_state: str | None = None,
     rto_target: float,
     rpo_target: float,
 ) -> dict:
@@ -148,6 +149,11 @@ def compute(
         reasons.append("service did not recover within the probe window")
     elif rto > rto_target:
         reasons.append(f"RTO {rto:.1f}s exceeds target {rto_target:.0f}s")
+
+    # Clients recovering is necessary but not sufficient: a runbook that never
+    # finishes leaves no notification, no verified state and a disarmed watchdog.
+    if runbook_state is not None and runbook_state != "SECONDARY_ACTIVE":
+        reasons.append(f"failover runbook did not complete (final state {runbook_state})")
 
     if recovery is not None and recovery.get("region") == primary_region:
         reasons.append("recovered on the primary region - failover did not happen (fault ended first?)")

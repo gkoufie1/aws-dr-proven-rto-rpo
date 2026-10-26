@@ -165,6 +165,7 @@ def handler(event, context):
         surviving={"aurora": surviving_aurora(run_id), "dynamodb": surviving_dynamodb(run_id)},
         timeline=timeline,
         fault_injected_at=fault_injected_at,
+        runbook_state=event.get("dr_state"),
         rto_target=RTO_TARGET,
         rpo_target=RPO_TARGET,
     )
