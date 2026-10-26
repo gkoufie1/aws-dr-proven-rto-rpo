@@ -1,0 +1,10 @@
+hosted_zone_name = "example.com" # existing public Route 53 zone
+api_subdomain    = "api-dr"
+
+# primary_region   = "us-east-1"
+# secondary_region = "us-west-2"
+
+# rto_target_seconds = 300
+# rpo_target_seconds = 5
+
+# alert_email = "you@example.com"

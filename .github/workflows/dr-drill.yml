@@ -1,0 +1,104 @@
+# Weekly, fully automated proof that DR works:
+#   apply both regions -> inject a region impairment with FIS -> let the
+#   watchdog + runbook recover on their own -> grade RTO/RPO -> commit the
+#   evidence -> destroy everything.
+# The stack only exists for the ~60-90 minutes of the run, which keeps an
+# Aurora Global Database inside a small monthly budget.
+
+name: dr-drill
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      failback:
+        description: "Also measure planned failback to the primary (adds 30-60 min)"
+        type: boolean
+        default: false
+      keep_stack:
+        description: "Skip destroy (you pay for Aurora until you tear it down)"
+        type: boolean
+        default: false
+
+permissions:
+  id-token: write # OIDC to AWS - no long-lived keys
+  contents: write # commit evidence
+
+concurrency:
+  group: dr-drill
+  cancel-in-progress: false
+
+env:
+  TF_IN_AUTOMATION: "1"
+  TF_INPUT: "0"
+  TF_VAR_hosted_zone_name: ${{ vars.HOSTED_ZONE_NAME }}
+  TF_VAR_alert_email: ${{ vars.ALERT_EMAIL }}
+
+jobs:
+  drill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    environment: dr-drill
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DRILL_ROLE_ARN }}
+          aws-region: us-east-1
+          role-duration-seconds: 14400 # role's MaxSessionDuration must allow 4 h
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.10"
+          terraform_wrapper: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: terraform init
+        working-directory: terraform
+        run: |
+          terraform init \
+            -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}" \
+            -backend-config="key=dr-proof/terraform.tfstate" \
+            -backend-config="region=${{ vars.TF_STATE_REGION }}" \
+            -backend-config="use_lockfile=true" \
+            -backend-config="encrypt=true"
+
+      - name: terraform apply (both regions)
+        working-directory: terraform
+        run: terraform apply -auto-approve
+
+      - name: run drill
+        id: drill
+        run: |
+          set +e
+          if [ "${{ inputs.failback }}" = "true" ]; then bash scripts/run-drill.sh --failback; else bash scripts/run-drill.sh; fi
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+
+      - name: publish evidence
+        if: always() && steps.drill.outputs.run_id != ''
+        run: |
+          python scripts/publish_results.py
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence docs/RESULTS.md README.md
+          verdict=$(python -c "import json;print(json.load(open('evidence/drills/${{ steps.drill.outputs.run_id }}/result.json'))['verdict'])" 2>/dev/null || echo ERRORED)
+          git commit -m "drill: ${{ steps.drill.outputs.run_id }} ${verdict}" || echo "nothing to commit"
+          git pull --rebase --autostash && git push
+
+      - name: teardown
+        if: always() && inputs.keep_stack != true
+        run: bash scripts/teardown.sh
+
+      - name: grade
+        if: always()
+        run: |
+          code="${{ steps.drill.outputs.exit_code }}"
+          if [ "$code" != "0" ]; then echo "::error::drill errored (exit $code)"; exit 1; fi
+          verdict=$(python -c "import json;print(json.load(open('evidence/drills/${{ steps.drill.outputs.run_id }}/result.json'))['verdict'])")
+          echo "verdict: $verdict"
+          [ "$verdict" = "PASS" ] || { echo "::error::DR drill verdict $verdict"; exit 1; }

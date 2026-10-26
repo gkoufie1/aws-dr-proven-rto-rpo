@@ -1,0 +1,36 @@
+# Every skip below is a deliberate trade-off for an ephemeral, budget-capped
+# DR lab - not an oversight. Each would be revisited for a production stack.
+framework:
+  - terraform
+compact: true
+quiet: true
+skip-check:
+  # --- Ephemeral by design (apply -> drill -> destroy every run) -----------
+  - CKV_AWS_139   # RDS deletion protection: off so the drill workflow can destroy the stack
+  - CKV2_AWS_8    # AWS Backup plan for RDS: stack lives ~90 min; DR is the subject, not backup
+  - CKV_AWS_338   # 1-year log retention: 14 days is plenty for a lab that is destroyed weekly
+  - CKV_AWS_144   # S3 cross-region replication: evidence is committed to git, which is the durable record
+  - CKV_AWS_21    # versioning on FIS fault-config bucket: objects are transient and expire after a day
+  - CKV2_AWS_57   # secret rotation: credentials live as long as the stack (~90 min)
+
+  # --- Cost: each adds standing spend that a $20/month cap cannot absorb ----
+  - CKV_AWS_118   # RDS enhanced monitoring (Performance Insights is enabled instead)
+  - CKV_AWS_158   # KMS-encrypted log groups: logs hold no customer data
+  - CKV_AWS_18    # S3 access logging
+  - CKV2_AWS_62   # S3 event notifications
+  - CKV2_AWS_11   # VPC flow logs: the VPCs carry no traffic; apps reach Aurora via the Data API
+  - CKV_AWS_297   # Scheduler CMK: schedule payloads contain no sensitive data
+  - CKV_AWS_149   # Secrets Manager CMK: default aws/secretsmanager key is replicated per region
+  - CKV_AWS_145   # KMS on FIS config bucket: SSE-S3 avoids granting the FIS role KMS access
+
+  # --- Not applicable to this architecture --------------------------------
+  - CKV_AWS_226   # auto minor upgrades: no effect on Aurora Global Database members (AWS docs)
+  - CKV2_AWS_27   # Postgres query logging: postgresql log export is on; statement logging is noise here
+  - CKV_AWS_117   # Lambda in VPC: Data API removes the need; VPC would require NAT or endpoints
+  - CKV_AWS_116   # Lambda DLQ: functions are invoked synchronously (API GW, Step Functions, Scheduler w/o retries)
+  - CKV_AWS_115   # reserved concurrency: tiny fixed workload; reservation could starve the drill
+  - CKV_AWS_173   # env var encryption: env vars hold ARNs/names only, no secrets
+  - CKV_AWS_272   # code signing: single-author lab, packages built in CI from this repo
+  - CKV2_AWS_5    # SG attachment: false positive across module boundary (attached to the DR cluster)
+  - CKV_AWS_309   # API authorization: /health must be public for Route 53. Per-region SigV4 breaks across
+                  # failover (signature is bound to a region); production would use a JWT authorizer.
