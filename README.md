@@ -8,16 +8,105 @@ automation recover on its own, and publishes the measured recovery time and
 data loss.**
 
 Most teams claim DR. Very few can show evidence that it works. This repo
-produces that evidence every week and commits it next to the code.
+is built to produce that evidence on a schedule and commit it next to the
+code, including the runs that fail.
 
 ## Measured results
 
 <!-- RESULTS:START -->
-_No drills have been published yet - run the `dr-drill` workflow._
+| Latest drill | Verdict | Measured RTO | Measured RPO | Target RTO / RPO |
+|---|---|---|---|---|
+| `drill-20261026T204238Z` | **FAIL** | 129.1 s | 33.0 s | 300 s / 5 s |
+
+Across **2** drills: 0/2 passed, RTO p50 168.1 s / worst 207.1 s, worst RPO 33.0 s. Full history: [docs/RESULTS.md](docs/RESULTS.md).
 <!-- RESULTS:END -->
 
 Every number above comes from `evidence/drills/<run>/result.json`. The raw
-per-second probe samples sit next to it, so each figure can be recomputed.
+per-second probe samples and the full Step Functions execution history sit
+next to it, so each figure can be recomputed.
+
+## What the first real drills found
+
+The first session against real AWS (2026-10-26) ran three drills and one
+failback. Two bugs surfaced that no local test, `terraform validate` or
+checkov scan could catch, plus one genuine data-loss finding. All of it is
+in the evidence folder, including the failures.
+
+| Run | What happened | Result |
+|---|---|---|
+| `drill-20261026T201353Z` | Blocked before any fault was injected: the first `StartExperiment` in an account creates the FIS service-linked role, and the drill-control role was denied `iam:CreateServiceLinkedRole` | Not graded. Fixed with a permission scoped to that one role |
+| `drill-20261026T201739Z` | Failover **worked**: Aurora promoted us-west-2, Route 53 moved traffic, 0 of 128 acknowledged writes lost. But the runbook never recognised the promotion and polled for 14 minutes | **FAIL**: RTO 207 s, RPO 0 s, runbook incomplete |
+| failback after the fix | Planned `SwitchoverGlobalCluster` back to us-east-1, verified from outside | **88.6 s**, zero data loss |
+| `drill-20261026T204238Z` | Runbook succeeded in **52 s**. RTO **129 s**, broken down as detect 12 s → promote 20.5 s → verify 31 s → DNS + client 64.5 s. Aurora lost nothing; **DynamoDB lost 33 acknowledged writes** | **FAIL**: DynamoDB RPO 33 s against a 5 s target |
+
+### Bug: the runbook looked for a field that doesn't exist
+
+Step Functions' AWS SDK integrations return field names from the Java SDK,
+so the global-cluster member field is `DbClusterArn`. The CLI and boto3
+spell the same field `DBClusterArn`. The runbook's writer-detection
+expression used the boto3 spelling, so it never matched, even while Aurora
+reported us-west-2 as the writer. Local validation passed because the test
+data was written in boto3 casing; only a real execution exposed it. The fix
+was then verified against the exact SDK response captured from the stuck
+run.
+
+![Stuck runbook: running for 8 minutes, 151 state transitions](docs/screenshots/bug-01-runbook-stuck-8min.png)
+*The stuck execution: Aurora had already failed over, but the runbook kept polling `WaitForPromotion` ⇄ `CheckPromotion`.*
+
+This run also changed the grading rules. The analyzer at the time graded it
+**PASS**, because clients recovered within target. But a runbook that never
+finishes means no notification, no verified state and a disarmed watchdog,
+so the analyzer now fails any drill whose runbook doesn't complete. The run
+was re-graded with the original inputs; the earlier PASS is kept as a prior
+version in the versioned evidence bucket.
+
+### Finding: DynamoDB RPO when the replication link fails first
+
+In drill 3 the FIS experiment cut DynamoDB replication about 40 seconds
+before the Lambda fault reached every execution environment. For that
+window us-east-1 kept acknowledging writes that could no longer reach
+us-west-2. The 33 lost writes (sequence 79–111) end exactly one write before
+the first client error (sequence 112). Aurora lost nothing, because its
+storage-level replication was never cut.
+
+That's what real regional failures often look like: the network between
+regions degrades before the application fails. **Asynchronous multi-region
+replication can't guarantee a 5 s RPO in that scenario.** The writes
+reappear once the region returns, but they are unavailable at failover time,
+which is what RPO measures. Options:
+- accept and document the RPO;
+- make the application acknowledge a write only while replication is
+  healthy (trading availability for durability);
+- use DynamoDB multi-Region strong consistency, which gives RPO 0 but needs
+  a third region or a witness. This is planned for the active-active phase.
+
+Drill 2 never showed this: per AWS docs the replication pause can take up to
+5 minutes to take full effect, and that time it hadn't. The same experiment
+produced different exposure, which is exactly why drills need to run more
+than once.
+
+### Smaller observations
+- **FIS ramps up gradually.** Detection took 80 s in drill 2 and 12 s in
+  drill 3. The FIS Lambda extension picks up faults per execution
+  environment on its own polling cycle, so during ramp-up some health probes
+  still succeed and keep resetting the watchdog's "3 in a row" failure
+  counter.
+- **AWS retires engine versions.** Aurora PostgreSQL 16.6, the first version
+  chosen, no longer existed in either region by deploy time. A pre-apply
+  check caught it before a failed 20-minute apply.
+
+## A drill in screenshots
+
+All from the same session; run IDs match the committed evidence.
+
+| | |
+|---|---|
+| ![Global DB before](docs/screenshots/02-aurora-global-before.png) **Before:** one writer in us-east-1, a warm secondary in us-west-2 | ![Health before](docs/screenshots/03-route53-health-before.png) **Before:** the DR region reports unhealthy by design until it holds the writer |
+| ![FIS running](docs/screenshots/05-fis-experiment-running.png) **Break it:** AWS FIS impairs the primary region | ![Both unhealthy](docs/screenshots/06-route53-both-unhealthy.png) **Outage window:** neither region can commit writes |
+| ![Watchdog fired](docs/screenshots/06b-watchdog-started-failover.png) **Detect:** the watchdog in us-west-2 starts the runbook (`auto-…`, no human) | ![Failover graph](docs/screenshots/07-failover-graph-all-green.png) **Recover:** the failover runbook, all green |
+| ![Succeeded](docs/screenshots/08-failover-succeeded-52s.png) **52 seconds** from detection to verified DR | ![Traffic moved](docs/screenshots/09-route53-traffic-moved-to-dr.png) **Traffic moved:** the DR region now healthy |
+| ![Global DB after](docs/screenshots/11-aurora-global-after-failover.png) **After:** us-west-2 is the writer; the old primary resyncs | ![Failback](docs/screenshots/15-failback-succeeded-88s.png) **Return trip:** planned failback in 88.6 s |
+| ![Drill graph](docs/screenshots/13-drill-graph.png) **The drill:** probe and chaos branches in parallel, then grading | ![Dashboard](docs/screenshots/10-dashboard-full-session.png) **The whole session** on one dashboard: apply, failover, failback, failover |
 
 ## Architecture
 
