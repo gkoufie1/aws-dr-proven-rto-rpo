@@ -1,8 +1,11 @@
 # Automated Disaster Recovery with Proven RTO/RPO
 
-Multi-region active-passive DR on AWS (Aurora Global Database, DynamoDB
-global tables, Route 53 health-check failover, an automated failover
-runbook) plus the part most DR setups skip: **a scheduled chaos drill that
+Multi-region disaster recovery on AWS, built twice:
+- **active-passive:** Aurora Global Database, DynamoDB global tables, Route 53
+  health-check failover and an automated failover runbook;
+- **active-active:** Aurora DSQL multi-Region with Route 53 latency routing.
+
+Both get the part most DR setups skip: **a scheduled chaos drill that
 breaks the primary region with AWS Fault Injection Service, lets the
 automation recover on its own, and publishes the measured recovery time and
 data loss.**
@@ -11,7 +14,21 @@ Most teams claim DR. Very few can show evidence that it works. This repo
 is built to produce that evidence on a schedule and commit it next to the
 code, including the runs that fail.
 
-## Measured results
+It contains two architectures. Each was drilled against real AWS with an FIS
+regional impairment and graded automatically from client-observed data:
+
+| | Phase 1: active-passive ([terraform/](terraform/)) | Phase 2: active-active ([active-active/](active-active/)) |
+|---|---|---|
+| Who serves traffic | us-east-1 only; us-west-2 is a pilot light | **Both regions, all the time** |
+| Database | Aurora Global Database (one writer, async) + DynamoDB global table | **Aurora DSQL multi-Region** (both writable, synchronous, witness in us-east-2) |
+| Recovery mechanism | Watchdog → Step Functions runbook → promote Aurora → DNS failover | **DNS only**: Route 53 latency routing stops sending clients to the sick region |
+| Longest outage a client saw | **129 s** (best run) | **54 s** |
+| Confirmed writes lost | Aurora 0; **DynamoDB 33** when replication broke first | **0 of 1,265**, read back from both regions |
+| Clients on the healthy region | n/a (all traffic was on the primary) | **0 failed writes** |
+| Return to normal | Planned failback runbook, 88.6 s | **Automatic**, 28 s after the fault ended |
+| Drill verdict | 0/2 PASS (both defects fixed, see below) | **1/1 PASS** |
+
+## Measured results: Phase 1 (active-passive)
 
 <!-- RESULTS:START -->
 | Latest drill | Verdict | Measured RTO | Measured RPO | Target RTO / RPO |
@@ -95,7 +112,7 @@ than once.
   chosen, no longer existed in either region by deploy time. A pre-apply
   check caught it before a failed 20-minute apply.
 
-## A drill in screenshots
+## A Phase 1 drill in screenshots
 
 All from the same session; run IDs match the committed evidence.
 
@@ -108,7 +125,148 @@ All from the same session; run IDs match the committed evidence.
 | ![Global DB after](docs/screenshots/11-aurora-global-after-failover.png) **After:** us-west-2 is the writer; the old primary resyncs | ![Failback](docs/screenshots/15-failback-succeeded-88s.png) **Return trip:** planned failback in 88.6 s |
 | ![Drill graph](docs/screenshots/13-drill-graph.png) **The drill:** probe and chaos branches in parallel, then grading | ![Dashboard](docs/screenshots/10-dashboard-full-session.png) **The whole session** on one dashboard: apply, failover, failback, failover |
 
-## Architecture
+## Phase 2: active-active with Aurora DSQL
+
+Phase 1 proved that an automated failover *works* and measured what it
+costs: two minutes of errors and, for the asynchronous store, real data
+loss. Phase 2 asks whether both can go away. Both regions take writes all the
+time, and recovery is nothing more than DNS.
+
+```mermaid
+flowchart LR
+    ce["East client<br/>(Lambda in us-east-2)"] --> r53{"Route 53<br/>latency records<br/>aa.dr.example.com"}
+    cw["West client<br/>(Lambda in us-west-2)"] --> r53
+
+    subgraph E["us-east-1 - active"]
+        apiE["HTTP API + Lambda<br/>(FIS extension layer)"]
+        dsqlE[("Aurora DSQL<br/>regional endpoint")]
+        fis["AWS FIS<br/>fail every east API call"]
+        apiE -- "IAM token, role app" --> dsqlE
+        fis -. "invocation errors" .-> apiE
+    end
+
+    subgraph W["us-west-2 - active"]
+        apiW["HTTP API + Lambda"]
+        dsqlW[("Aurora DSQL<br/>regional endpoint")]
+        an["Analyzer<br/>reads back from BOTH regions"]
+        apiW -- "IAM token, role app" --> dsqlW
+    end
+
+    wit[("us-east-2<br/>DSQL witness")]
+
+    r53 -- "nearest healthy" --> apiE
+    r53 -- "nearest healthy" --> apiW
+    dsqlE <== "synchronous commit (quorum)" ==> dsqlW
+    dsqlE -.- wit
+    dsqlW -.- wit
+```
+
+**The drill.** Two synthetic clients write once per second through the public
+hostname for 11 minutes. Route 53 sends the client in us-east-2 to us-east-1
+and the client in us-west-2 to us-west-2, as it would real users. After a
+60 s baseline, FIS fails every east API invocation for 5 minutes. Nothing
+performs a failover. The drill only watches what clients experience, then
+reads every write back from **each** region's DSQL endpoint.
+
+**Grading.** PASS needs all of these:
+- no client sees an outage longer than 120 s;
+- every acknowledged write is present in both regions (RPO = 0, no tolerance);
+- the impaired region's clients actually moved to the other region.
+
+A region whose data can't be read back makes the run FAIL as unverified. A
+fault that never bit makes it INCONCLUSIVE. The logic is in
+[active-active/src/analyzer/aa_metrics.py](active-active/src/analyzer/aa_metrics.py)
+and has its own unit tests.
+
+### Result: `aa-drill-20261027T180932Z`, PASS
+
+| Measured | Value |
+|---|---|
+| East client's longest outage | **54.0 s** (target 120 s) |
+| Time from fault to east client being served by us-west-2 | 88.5 s after FIS started. The FIS extension took 34.5 s to fail calls consistently (after one 1 s blip at 14.5 s); the outage itself ran 18:12:58-18:13:52 UTC |
+| Back on us-east-1 after the fault ended | **27.9 s**, no human or runbook |
+| West client | 660/660 writes acknowledged, **0 failed** |
+| Acknowledged writes lost | **0 of 1,265**, verified in us-east-1 and us-west-2 |
+| Writes that committed but weren't acknowledged | 0 |
+| Database commit time, median (from the API) | 88 ms (east), 81 ms (west): the cost of a synchronous cross-region quorum |
+| Client-observed write latency, median | 150 ms (east client), 113 ms (west client) |
+
+Evidence: [evidence/active-active/aa-drill-20261027T180932Z/](evidence/active-active/aa-drill-20261027T180932Z/)
+(`result.json`, both clients' per-second samples, the FIS experiment record).
+
+### Where the 54 seconds went
+
+Route 53 checks each region's `/health` every 10 s from several locations and
+needs 2 failures in a row. The alias answer then has to age out of the
+client resolver's cache (60 s TTL). Health-check detection plus DNS caching
+is the whole outage. There is no database step, because there's nothing to
+promote. The next levers are client-side:
+- retry the other region on a 5xx;
+- shorter health-check thresholds;
+- Route 53 Application Recovery Controller for a manual "drain east" switch.
+
+### Phase 2 in screenshots
+
+| | |
+|---|---|
+| ![Dashboard](docs/screenshots/aa-01-dashboard-regional-shift.png) **The drill on one screen.** us-east-1's health check drops at 18:13 and recovers at 18:18. The east client's writes move from us-east-1 (blue) to us-west-2 (orange) and back. The west client's line never moves. (Both checks read 0 until about 18:08 only because they had just been created.) | ![DSQL east](docs/screenshots/aa-02-dsql-east-peered.png) **One database, two writable regions.** The us-east-1 cluster is peered with us-west-2 |
+| ![DSQL west](docs/screenshots/aa-03-dsql-west-peered-witness.png) **The witness.** us-east-2 holds only the transaction log, so a quorum survives losing either serving region | ![Health checks](docs/screenshots/aa-04-route53-health-checks.png) **Both regions healthy** in steady state (in Phase 1 the DR region was unhealthy by design) |
+| ![Custom domain](docs/screenshots/aa-05-custom-domain-regional.png) **Same hostname, regional endpoints.** `aa.dr…` is served by a regional API in each region | ![FIS layer](docs/screenshots/aa-06-east-api-with-fis-layer.png) **The fault target.** The east API carries the FIS Lambda extension layer |
+| ![IAM](docs/screenshots/aa-07-iam-role-no-password.png) **No database password anywhere.** The API role's only database permission is `dsql:DbConnect`, mapped to a SELECT/INSERT-only database role | ![FIS completed](docs/screenshots/aa-08-fis-experiment-completed.png) **The fault ran its full 5 minutes**, with a stop-condition alarm armed |
+| ![Evidence](docs/screenshots/aa-09-evidence-bucket.png) **Evidence written by the drill**, then committed to this repo | |
+
+### Security model
+
+- **No passwords or secrets.** Every connection uses a 15-minute IAM token.
+- **Three database roles, mapped with `AWS IAM GRANT`:**
+  - `app`: SELECT and INSERT on one table, mapped to the two API roles;
+  - `auditor`: SELECT only, mapped to the analyzer;
+  - `admin`: used only by the one-off migrate function.
+- **The mappings replicate.** The migrate function runs against both regional
+  endpoints. The second run finds the roles and mappings already there and
+  creates nothing.
+
+### What Phase 2 does and doesn't prove
+
+- **FIS has no fault action for DSQL.** The drill impairs the east compute
+  tier, not the database. RPO = 0 here is verified by reading back every
+  acknowledged write in both regions after the impairment. It doesn't show
+  what happens if a DSQL region itself fails. AWS documents that case (the
+  witness keeps a quorum), but this repo hasn't tested it.
+- **Synchronous replication isn't free.** Every commit waits for a
+  cross-region quorum, at roughly 80–90 ms here. Writes that suit this pattern
+  are things like orders, balances and ledgers. For high-volume, low-value
+  writes the asynchronous Phase 1 trade-off is often the better one.
+- **Write conflicts aren't tested.** DSQL uses optimistic concurrency, so
+  conflicting writes to the same row from two regions get a serialization
+  error and must retry. The drill's writes never conflict (unique keys per
+  client), so that path is unmeasured.
+- **One run, one fault type.** The 54 s is one measurement, not a
+  distribution. Treat it as a data point until more drills accumulate.
+- **Both clients run inside AWS.** Real users' resolvers may hold DNS
+  answers past the TTL.
+
+### Running Phase 2
+
+```bash
+cd active-active/terraform
+cp backend.hcl.example backend.hcl          # different state key from Phase 1
+cp terraform.tfvars.example terraform.tfvars
+bash ../scripts/build.sh                    # bundle the pure-Python Postgres driver
+terraform init -backend-config=backend.hcl && terraform apply
+bash ../scripts/run-drill.sh                # ~12 min; evidence lands in evidence/active-active/
+bash ../scripts/teardown.sh
+```
+
+Cost per session (apply, one drill, teardown) is about $1–2:
+- DSQL stays inside the free tier at drill volumes, and the witness is free;
+- 2 HTTPS health checks, prorated;
+- about $0.50 of FIS action time.
+
+Left running idle, DSQL costs close to nothing, unlike Phase 1's Aurora ACU
+floor.
+
+## Phase 1 architecture: active-passive
 
 ```mermaid
 flowchart LR
@@ -376,5 +534,16 @@ src/
   drill_control/   cross-region FIS control + external health checks
 scripts/           run-drill.sh, teardown.sh, publish_results.py
 evidence/drills/   committed drill evidence (result.json + samples.jsonl)
-docs/              RESULTS.md (generated), runbook.md
+docs/              RESULTS.md (generated), runbook.md, screenshots/
+active-active/     Phase 2, self-contained
+  terraform/       DSQL multi-Region cluster + peering, both regional APIs,
+                   latency records + health checks, FIS, clients, analyzer, dashboard
+  src/app/         regional order API on DSQL (IAM token auth, role `app`)
+  src/migrate/     schema, least-privilege DB roles, IAM mappings (the only `admin` user)
+  src/prober/      synthetic client, 1 write/s, EMF metrics for the dashboard
+  src/analyzer/    grading (pure logic in aa_metrics.py) + read-back from both regions
+  src/common/      DSQL connection helper (token auth, reconnect)
+  scripts/         build.sh, run-drill.sh, teardown.sh
+evidence/active-active/  committed Phase 2 drill evidence
+tests/             unit tests for both graders
 ```

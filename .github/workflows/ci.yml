@@ -11,9 +11,12 @@ permissions:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        stack: [terraform, active-active/terraform]
     defaults:
       run:
-        working-directory: terraform
+        working-directory: ${{ matrix.stack }}
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
@@ -31,14 +34,18 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements-dev.txt
-      - run: python -m compileall -q src scripts
+      - run: python -m compileall -q src scripts active-active/src
+      - run: bash active-active/scripts/build.sh
       - run: python -m pytest -q
 
   checkov:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        stack: [terraform, active-active/terraform]
     steps:
       - uses: actions/checkout@v4
       - uses: bridgecrewio/checkov-action@v12
         with:
-          directory: terraform
+          directory: ${{ matrix.stack }}
           config_file: .checkov.yaml

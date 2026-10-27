@@ -1,0 +1,64 @@
+{
+    "experiment": {
+        "id": "EXPbBnD1nEGP4uaxEE",
+        "arn": "arn:aws:fis:us-east-1:829241815848:experiment/EXPbBnD1nEGP4uaxEE",
+        "experimentTemplateId": "EXTDAkmF7mDiLSwy2",
+        "roleArn": "arn:aws:iam::829241815848:role/dr-aa-fis-experiment",
+        "state": {
+            "status": "completed",
+            "reason": "Experiment completed."
+        },
+        "targets": {
+            "east-api": {
+                "resourceType": "aws:lambda:function",
+                "resourceArns": [
+                    "arn:aws:lambda:us-east-1:829241815848:function:dr-aa-east-app"
+                ],
+                "selectionMode": "ALL"
+            }
+        },
+        "actions": {
+            "fail-east-api": {
+                "actionId": "aws:lambda:invocation-error",
+                "description": "Every east API invocation returns an error without running handler code.",
+                "parameters": {
+                    "duration": "PT5M",
+                    "invocationPercentage": "100",
+                    "preventExecution": "true"
+                },
+                "targets": {
+                    "Functions": "east-api"
+                },
+                "state": {
+                    "status": "completed",
+                    "reason": "Action was completed."
+                },
+                "startTime": "2026-10-27T14:12:24.098000-04:00",
+                "endTime": "2026-10-27T14:17:24.639000-04:00"
+            }
+        },
+        "stopConditions": [
+            {
+                "source": "aws:cloudwatch:alarm",
+                "value": "arn:aws:cloudwatch:us-east-1:829241815848:alarm:dr-aa-no-healthy-region"
+            }
+        ],
+        "creationTime": "2026-10-27T14:11:56.559000-04:00",
+        "startTime": "2026-10-27T14:11:56.917000-04:00",
+        "endTime": "2026-10-27T14:17:25.200000-04:00",
+        "tags": {
+            "run_id": "aa-drill-20261027T180932Z"
+        },
+        "logConfiguration": {
+            "cloudWatchLogsConfiguration": {
+                "logGroupArn": "arn:aws:logs:us-east-1:829241815848:log-group:/aws/fis/dr-aa:*"
+            },
+            "logSchemaVersion": 2
+        },
+        "experimentOptions": {
+            "accountTargeting": "single-account",
+            "emptyTargetResolutionMode": "fail",
+            "actionsMode": "run-all"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+# Bundled into the app, migrate and analyzer Lambda packages by scripts/build.sh.
+# Pure Python, so the same wheels work on Lambda (arm64 and x86_64) and locally.
+pg8000==1.31.6  # earlier 1.31.x call scramp APIs removed in scramp 1.5
+# pg8000 pulls python-dateutil; keep it on the 2.x line botocore requires,
+# because the bundled copy shadows the Lambda runtime's own.
+python-dateutil>=2.8.2,<3

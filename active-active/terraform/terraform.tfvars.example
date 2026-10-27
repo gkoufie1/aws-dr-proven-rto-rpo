@@ -1,0 +1,3 @@
+# Copy to terraform.tfvars (gitignored) and fill in.
+hosted_zone_name = "dr.example.com" # existing public Route 53 zone
+api_subdomain    = "aa"             # -> aa.dr.example.com

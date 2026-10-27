@@ -1,0 +1,7 @@
+# Copy to backend.hcl (gitignored). Same bucket as the active-passive stack is
+# fine; the key MUST differ.
+bucket       = "my-tfstate-bucket"
+key          = "dr-proof/active-active.tfstate"
+region       = "us-east-1"
+use_lockfile = true
+encrypt      = true

@@ -1,0 +1,106 @@
+{
+  "verdict": "PASS",
+  "reasons": [],
+  "impaired_region": "us-east-1",
+  "fault": {
+    "start": 1793124744.098,
+    "end": 1793125044.639,
+    "seconds": 300.5
+  },
+  "headline": {
+    "impacted_client_max_outage_seconds": 54.0,
+    "rerouted_after_seconds": 88.5,
+    "returned_home_after_seconds": 27.9,
+    "unaffected_client_failed_writes": 0,
+    "acked_writes": 1265,
+    "lost_acked_writes": 0
+  },
+  "clients": {
+    "east": {
+      "home_region": "us-east-1",
+      "samples": 660,
+      "acked": 605,
+      "failed": 55,
+      "availability_pct": 91.67,
+      "failed_during_fault": 55,
+      "served_by": {
+        "us-east-1": 365,
+        "us-west-2": 240
+      },
+      "outages": [
+        {
+          "start": 1793124758.574252,
+          "end": 1793124759.5742571,
+          "recovered": true,
+          "seconds": 1.0
+        },
+        {
+          "start": 1793124778.5742702,
+          "end": 1793124832.574261,
+          "recovered": true,
+          "seconds": 54.0
+        }
+      ],
+      "max_outage_seconds": 54.0,
+      "rerouted_after_seconds": 88.5,
+      "returned_home_after_seconds": 27.9,
+      "latency_ms": {
+        "baseline_p50": 150.5,
+        "baseline_p99": 413.9,
+        "all_p50": 156.1,
+        "all_p99": 272.3,
+        "commit_p50": 88.3
+      }
+    },
+    "west": {
+      "home_region": "us-west-2",
+      "samples": 660,
+      "acked": 660,
+      "failed": 0,
+      "availability_pct": 100.0,
+      "failed_during_fault": 0,
+      "served_by": {
+        "us-west-2": 660
+      },
+      "outages": [],
+      "max_outage_seconds": 0.0,
+      "rerouted_after_seconds": null,
+      "returned_home_after_seconds": null,
+      "latency_ms": {
+        "baseline_p50": 112.9,
+        "baseline_p99": 422.5,
+        "all_p50": 107.6,
+        "all_p99": 230.1,
+        "commit_p50": 81.2
+      }
+    }
+  },
+  "durability": {
+    "us-east-1": {
+      "verified": true,
+      "lost_acked_writes": 0,
+      "rpo_seconds": 0.0,
+      "unacked_but_persisted": 0
+    },
+    "us-west-2": {
+      "verified": true,
+      "lost_acked_writes": 0,
+      "rpo_seconds": 0.0,
+      "unacked_but_persisted": 0
+    }
+  },
+  "targets": {
+    "max_outage_seconds": 120.0,
+    "rpo_seconds": 0
+  },
+  "run_id": "aa-drill-20261027T180932Z",
+  "architecture": "active-active",
+  "drill_started_at": 1793124651.5743234,
+  "graded_at": "2026-10-27T18:22:14.108535+00:00",
+  "fault_description": "Impair us-east-1: the API Lambda fails every invocation for PT5M.",
+  "experiment": {
+    "experiment_id": "EXPbBnD1nEGP4uaxEE",
+    "experiment_state": "completed",
+    "action_state": "completed"
+  }
+}
