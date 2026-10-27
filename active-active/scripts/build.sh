@@ -10,10 +10,10 @@ PY_BIN="$(command -v python || command -v python3)"
 rm -rf "$BUILD"
 mkdir -p "$BUILD/deps"
 
-NATIVE_DEPS="$BUILD/deps"
-command -v cygpath >/dev/null 2>&1 && NATIVE_DEPS="$(cygpath -m "$BUILD/deps")"
+# Native python.exe on Windows needs Windows paths, not /c/...
+native() { if command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else echo "$1"; fi; }
 "$PY_BIN" -m pip install --quiet --disable-pip-version-check --no-compile \
-  --target "$NATIVE_DEPS" -r "$AA/requirements.txt"
+  --target "$(native "$BUILD/deps")" -r "$(native "$AA/requirements.txt")"
 
 for fn in app migrate analyzer prober; do
   mkdir -p "$BUILD/$fn"
